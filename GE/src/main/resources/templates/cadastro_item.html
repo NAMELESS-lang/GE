@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro item</title>
+</head>
+<body>
+    <main id="principal">
+        <form id="form_cadastro">
+            <label for="nome_produto">Nome do produto:</label>
+            <input name="nome_produto" type="text" required>
+
+            <label for="data_validade">Data de validade:</label>
+            <input name="data_validade" type="date" required>
+
+            <label for="marca">Marca:</label>
+            <input marca="marca" type="text" required>
+
+            <label for="quantidade">Quantidade:</label>
+            <input name="quantidade" type="number" min="1" required>
+
+            <label for="peso_produto">Peso do produto:</label>
+            <select name="peso_produto" required>
+                <option value="kg">Kg</option>
+                <option value="g">g</option>
+                <option value="l">L</option>
+                <option value="ml">ml</option>
+                <option value="un">un</option>
+            </select>
+
+            <label for="valor">Valor</label>
+            <input name="valor" type="number" required">
+
+            <button type="submit">Cadastrar produto</button>
+        </form>
+    </main>
+    <script src="../javascript/cadastro_item.js"></script>
+</body>
+</html>
