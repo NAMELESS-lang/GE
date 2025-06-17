@@ -11,8 +11,8 @@ import model.*;
 public class Cadastro_product {
 	
 	@PostMapping("/cadastrar") // Caso o método seja POST este método é chamado
-	public String Cadastrar() { // Recebe como argumento o JSON da requisição http e usa automaticamento no construtor do produto
-		return "deu certo";
+	public String Cadastrar(@RequestBody Product produto) { // Recebe como argumento o JSON da requisição http e usa automaticamento no construtor do produto
+		return produto.getNomeProduto();
 	}
 
 }
