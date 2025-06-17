@@ -12,8 +12,8 @@ public class Product{
 		private Double valor;
 	
 	
-		public Product(String nome_item, String data_validade, String marca, Integer quantidade, Peso peso_produto, Double valor){
-			this.nome_produto = nome_item;
+		public Product(String nome_produto, String data_validade, String marca, Integer quantidade, Peso peso_produto, Double valor){
+			this.nome_produto = nome_produto;
 			this.data_validade = data_validade;
 			this.marca = marca;
 			this.quantidade = quantidade;
@@ -29,7 +29,7 @@ public class Product{
 			this.valor = valor;
 		}
 		
-		public void setnomeItem(String nome_item) { this.nome_produto = nome_item; }
+		public void setnomeProduto(String nome_item) { this.nome_produto = nome_item; }
 		public void setdataValidade(String data_validade) { this.data_validade = data_validade; }
 		public void setMarca(String marca) { this.marca = marca; }
 		public void setQuantidade(Integer quantidade) { this.quantidade = quantidade; }
@@ -37,7 +37,7 @@ public class Product{
 		public void setValor(Double valor) { this.valor = valor; }
 		
 		public String getcodigoBarras() {return this.codigo_barra;}
-		public String getnomeItem() { return this.nome_produto;}
+		public String getnomeProduto() { return this.nome_produto;}
 		public String getdataValidade() { return this.data_validade;}
 		public String getMarca() { return this.marca;}
 		public Integer getQuantidade() {return this.quantidade;}
