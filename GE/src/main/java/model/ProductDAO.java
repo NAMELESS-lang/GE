@@ -86,7 +86,9 @@ public class ProductDAO implements InterfaceProductDAO{
 			conexao.iniciarConexao();
 			String query = "SELECT codigo_barra FROM Product WHERE codigo_barra = ?";
 			
-			Statement state = conexao.getConn().prepareStatement(query);
+			PreparedStatement state = conexao.getConn().prepareStatement(query);
+			state.setString(1, codigo_barras);
+			
 			boolean resultado = state.execute(query);
 			
 			conexao.getConn().commit(); // Confirma as alterações

@@ -12,7 +12,8 @@ function cadastrar(){
     form.forEach((element,key) => {
         dados[key] = element;
     });
-
+    let data = new Date(dados['data_validade']);
+    dados['data_validade'] = data.getTime();
     const requisicao = {
         method : "POST",
         headers: {'Content-Type':'application/json'},

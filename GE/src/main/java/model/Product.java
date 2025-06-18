@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.SQLException;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Date;
@@ -9,7 +7,7 @@ import java.sql.Date;
 public class Product{
 		private String codigo_barra = "";
 		private String nomeProduto;
-		private String dataValidade; // Transformar em um arraylist com o dia, mes e ano;
+		private Date dataValidade;
 		private String marca;
 		private Integer quantidade;
 		private Peso pesoProduto = null;
@@ -17,7 +15,7 @@ public class Product{
 	
 		@JsonCreator
 		public Product( @JsonProperty("nome_produto") String nomeProduto, 
-						@JsonProperty("data_validade") String dataValidade, 
+						@JsonProperty("data_validade") Long dataValidade, 
 						@JsonProperty("marca") String marca, 
 						@JsonProperty("quantidade") Integer quantidade, 
 						@JsonProperty("peso_produto") Float peso, 
@@ -26,7 +24,7 @@ public class Product{
 					  )
 					{
 						this.nomeProduto = nomeProduto;
-						this.dataValidade = dataValidade;
+						this.dataValidade = new Date(dataValidade);
 						this.marca = marca;
 						this.quantidade = quantidade;
 						this.pesoProduto = new Peso(valor, unidade);
@@ -34,14 +32,14 @@ public class Product{
 					}
 		
 		public void setNomeProduto(String nome_item) { this.nomeProduto = nome_item; }
-		public void setDataValidade(String data_validade) { this.dataValidade = data_validade; }
+		public void setDataValidade(Date data_validade) { this.dataValidade = data_validade; }
 		public void setMarca(String marca) { this.marca = marca; }
 		public void setQuantidade(Integer quantidade) { this.quantidade = quantidade; }
 		public void setValor(Double valor) { this.valor = valor; }
 		
 		public String getcodigoBarras() {return this.codigo_barra;}
 		public String getNomeProduto() { return this.nomeProduto;}
-		public String getDataValidade() { return this.dataValidade;}
+		public Date getDataValidade() { return this.dataValidade;}
 		public String getMarca() { return this.marca;}
 		public Integer getQuantidade() {return this.quantidade;}
 		public Peso getPeso() { return this.pesoProduto;}
@@ -59,10 +57,6 @@ public class Product{
 				}
 			return this.codigo_barra = codigo;
 			}
-		
-		public Date corrigirDate() {
-			Date data_validade = new Date(this.dataValidade);
-		}
 		
 		@Override
 		public String toString() {
