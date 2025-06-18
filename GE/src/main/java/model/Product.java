@@ -3,7 +3,7 @@ package model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Date;
-
+import java.util.Random;
 public class Product{
 		private String codigo_barra = "";
 		private String nomeProduto;
@@ -52,8 +52,9 @@ public class Product{
 		
 		public String criarCodigobarra() {
 			String codigo = new String();
+			Random r = new Random();
 			for(int i = 0; i <5;i++) {
-				codigo += Math.random();
+				codigo += r.nextInt(10);
 				}
 			return this.codigo_barra = codigo;
 			}
@@ -61,7 +62,6 @@ public class Product{
 		@Override
 		public String toString() {
 			return "formatar o to string";
-			
 		}
 		
 		class Peso{

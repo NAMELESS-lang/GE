@@ -19,15 +19,14 @@ public class Cadastro_product {
 			ConexaoDB conexao = new ConexaoDB("localhost","matheus","1234","TESTE");
 			ProductDAO productdao = new ProductDAO();
 			
-			
-			// Modificar o date do produto para inserí-lo no banco de dados, pois o método não aceita string(que é o que retorna no momento), 
-			//mas objetos do tipo date
+			// Define o código de barras do produto
 			produto.criarCodigobarra();
 			
 			
 			while(productdao.consultarCodigobarras(conexao, produto.getcodigoBarras())) {
 				produto.criarCodigobarra();
 			}
+			
 			productdao.Cadastrar(conexao, produto);
 			
 			
