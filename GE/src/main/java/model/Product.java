@@ -4,11 +4,12 @@ import java.sql.SQLException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.sql.Date;
 
 public class Product{
 		private String codigo_barra = "";
 		private String nomeProduto;
-		private String dataValidade;
+		private String dataValidade; // Transformar em um arraylist com o dia, mes e ano;
 		private String marca;
 		private Integer quantidade;
 		private Peso pesoProduto = null;
@@ -46,48 +47,49 @@ public class Product{
 		public Peso getPeso() { return this.pesoProduto;}
 		public Double getValor() { return this.valor;}
 		
-		public String getProdutoformatado(){
-			String formatado = this.pesoProduto.getvalorPeso().toString() + this.pesoProduto.getMedida();
-			return formatado;
-		}
-		
 		public String getValorformatado() {
 			String formatado = this.valor + "R$";
 			return formatado;
 		}
 		
-		public String criarCodigobarra(Conexao_db conexao, ProductDAO productDAO) throws SQLException {
+		public String criarCodigobarra() {
 			String codigo = new String();
 			for(int i = 0; i <5;i++) {
 				codigo += Math.random();
-				if(i == 4) {
-					boolean retorno = productDAO.consultarCodigobarras(conexao, codigo);
-					if(retorno) {
-						return codigo;
-					}else {
-						codigo = "";
-						i = 0;
-					}
 				}
+			return this.codigo_barra = codigo;
 			}
-			return codigo;
+		
+		public Date corrigirDate() {
+			Date data_validade = new Date(this.dataValidade);
+		}
+		
+		@Override
+		public String toString() {
+			return "formatar o to string";
+			
 		}
 		
 		class Peso{
 			@JsonProperty("peso_produto")
-			private Double valor_peso;
+			private Double valorPeso;
 			@JsonProperty("unidade")
 			private String medida;
 			
-			public Peso(Double valor_peso, String medida) {
-				this.valor_peso = valor_peso;
+			public Peso(Double valorPeso, String medida) {
+				this.valorPeso = valorPeso;
 				this.medida = medida;
 			}
 			
-		public void setvalorPeso(Double valor_peso) {this.valor_peso = valor_peso;}
-		public void setvalorMedida(String medida) { this.medida = medida;}
+			
+		public void setValorPeso(Double valorPeso) {this.valorPeso = valorPeso;}
+		public void setValorMedida(String medida) { this.medida = medida;}
 		
-		public Double getvalorPeso() { return this.valor_peso;}
+		public Double getValorPeso() { return this.valorPeso;}
 		public String getMedida() { return this.medida;}
+		
+		public String getProdutoformatado(){
+			return this.valorPeso + this.medida;
+		}
 		}
 }
