@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.Random;
 import java.sql.Statement;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,26 +88,29 @@ public class ProductDAO implements InterfaceProductDAO{
 	}
 	
 	@Override
-	public boolean criarCodigobarras(ConexaoDB conexao, Product produto) throws SQLException{
+	public void criarCodigobarras(ConexaoDB conexao, Product produto) throws SQLException{
 		try {
+			
+			String codigo = new String();
 			conexao.iniciarConexao();
 			String query = "SELECT codigo_barra FROM Product WHERE codigo_barra = ?";
-			
-			PreparedStatement state = conexao.getConn().prepareStatement(query);
-			state.setString(1, produto);
-			
-			boolean resultado = state.execute(query);
-			
-			
+			boolean retorno = true; // Variável de controle do laço while
+			while(retorno) { // Cria o código de barras e consulta no banco de dados para ver se já existe, se existir repete o processo até não haver
+				Random r = new Random();
+				for(int i = 0; i <5;i++) {
+					codigo += r.nextInt(10);
+				}
+				PreparedStatement state = conexao.getConn().prepareStatement(query);
+				state.setString(1, codigo);
+				retorno = state.execute(query);
+			}
+			produto.setCodigoBarras(codigo);
 			conexao.getConn().commit(); // Confirma as alterações
 			conexao.getConn().close(); // Fecha a conexão
-			return resultado;
-		
 	}catch(SQLException e) {
 		conexao.getConn().rollback();
 		System.out.println("Algum erro aconteceu!");
 		System.out.print("Erro: " + e.getMessage());
-		return false;
 	}
 	}
 }

@@ -2,10 +2,7 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.sql.Date;
-import java.util.Random;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import java.sql.Date;;
 public class Product{
 		private String codigoBarra = "";
 		private String nomeProduto;
@@ -25,7 +22,6 @@ public class Product{
 						@JsonProperty("valor") Double valor
 					  )
 					{
-						this.codigoBarra = this.criarCodigobarra();
 						this.nomeProduto = nomeProduto;
 						this.dataValidade = new Date(dataValidade);
 						this.marca = marca;
@@ -53,18 +49,6 @@ public class Product{
 			String formatado = this.valor + "R$";
 			return formatado;
 		}
-		
-		
-		// Mandar isto para o productDAO que já estabelece a comunicação com o db e facilita a análise
-		public String criarCodigobarra() {
-			String codigo = new String();
-			Random r = new Random();
-			for(int i = 0; i <5;i++) {
-				codigo += r.nextInt(10);
-				}
-			
-			return this.codigoBarra = codigo;
-			}
 		
 		@Override
 		public String toString() {

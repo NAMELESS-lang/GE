@@ -10,5 +10,5 @@ public interface InterfaceProductDAO {
 	
 	public void Atualizar(ConexaoDB conexao, Product produto) throws SQLException;
 	
-	public  boolean criarCodigobarras(ConexaoDB conexao, Product produto) throws SQLException; 
+	public  void criarCodigobarras(ConexaoDB conexao, Product produto) throws SQLException; 
 }
