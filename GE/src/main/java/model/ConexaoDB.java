@@ -40,7 +40,7 @@ public class ConexaoDB{
 		return this.conn;
 	}
 	
-	public boolean cloceConn() throws SQLException{
+	public boolean closeConn() throws SQLException{
 		try {
 			if(conn != null) {
 				this.conn.close();

@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Date;
 import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
 public class Product{
-		private String codigo_barra = "";
+		private String codigoBarra = "";
 		private String nomeProduto;
 		private Date dataValidade;
 		private String marca;
@@ -23,6 +25,7 @@ public class Product{
 						@JsonProperty("valor") Double valor
 					  )
 					{
+						this.codigoBarra = this.criarCodigobarra();
 						this.nomeProduto = nomeProduto;
 						this.dataValidade = new Date(dataValidade);
 						this.marca = marca;
@@ -31,13 +34,14 @@ public class Product{
 						this.valor = valor;
 					}
 		
+		public void setCodigoBarras(String codigoBarras) {this.codigoBarra = codigoBarras;}
 		public void setNomeProduto(String nome_item) { this.nomeProduto = nome_item; }
 		public void setDataValidade(Date data_validade) { this.dataValidade = data_validade; }
 		public void setMarca(String marca) { this.marca = marca; }
 		public void setQuantidade(Integer quantidade) { this.quantidade = quantidade; }
 		public void setValor(Double valor) { this.valor = valor; }
 		
-		public String getcodigoBarras() {return this.codigo_barra;}
+		public String getcodigoBarras() {return this.codigoBarra;}
 		public String getNomeProduto() { return this.nomeProduto;}
 		public Date getDataValidade() { return this.dataValidade;}
 		public String getMarca() { return this.marca;}
@@ -50,13 +54,16 @@ public class Product{
 			return formatado;
 		}
 		
+		
+		// Mandar isto para o productDAO que já estabelece a comunicação com o db e facilita a análise
 		public String criarCodigobarra() {
 			String codigo = new String();
 			Random r = new Random();
 			for(int i = 0; i <5;i++) {
 				codigo += r.nextInt(10);
 				}
-			return this.codigo_barra = codigo;
+			
+			return this.codigoBarra = codigo;
 			}
 		
 		@Override
