@@ -16,16 +16,18 @@ public class Cadastro_product {
 	public String Cadastrar(@RequestBody Product produto) throws SQLException { // Recebe como argumento o JSON da requisição http e usa automaticamento no construtor do produto
 		String message = "Houve um erro no cadastro, tente novamente!";
 		try {
-			// Crio o objeto conexão e DAO
+			// Crio o objeto conexão e o inicio, assim como o DAO
 			ConexaoDB conexao = new ConexaoDB("localhost","matheus","1234","TESTE");
+			conexao.iniciarConexao();
 			ProductDAO productdao = new ProductDAO();
 			
 			// Cadastra o produto no banco de dados
-			int status = productdao.Cadastrar(conexao, produto);
-			
-			conexao.closeConn();
-			
-			return "Produto cadastrado com sucesso";
+			boolean status = productdao.Cadastrar(conexao, produto);
+			if(status == true) {
+				conexao.closeConn();
+				return "Produto cadastrado com sucesso";
+			}
+			throw new Exception("Houve um erro no processo!");
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 			return message;
