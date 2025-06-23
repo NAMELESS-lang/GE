@@ -2,9 +2,9 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.sql.Date;;
+import java.sql.Date;		
 public class Product{
-		private String codigoBarra = "";
+		private String codigoBarra;
 		private String nomeProduto;
 		private Date dataValidade;
 		private String marca;
@@ -17,7 +17,7 @@ public class Product{
 						@JsonProperty("data_validade") Long dataValidade, 
 						@JsonProperty("marca") String marca, 
 						@JsonProperty("quantidade") Integer quantidade, 
-						@JsonProperty("peso_produto") Float peso, 
+						@JsonProperty("peso_produto") Double peso, 
 						@JsonProperty("unidade") String unidade,
 						@JsonProperty("valor") Double valor
 					  )
@@ -26,7 +26,7 @@ public class Product{
 						this.dataValidade = new Date(dataValidade);
 						this.marca = marca;
 						this.quantidade = quantidade;
-						this.pesoProduto = new Peso(valor, unidade);
+						this.pesoProduto = new Peso(peso, unidade);
 						this.valor = valor;
 					}
 		
@@ -52,7 +52,8 @@ public class Product{
 		
 		@Override
 		public String toString() {
-			return "formatar o to string";
+			return "Nome:"+this.codigoBarra;
+			
 		}
 		
 		class Peso{
