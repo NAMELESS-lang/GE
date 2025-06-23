@@ -35,7 +35,6 @@ public class ProductDAO implements InterfaceProductDAO{
 			if(status > 0) {
 				return true;
 			}
-			
 		}catch(SQLException e) {
 			conexao.getConn().rollback();
 			System.out.println("Algum erro aconteceu!");
@@ -63,21 +62,35 @@ public class ProductDAO implements InterfaceProductDAO{
 	}
 	
 	@Override
-	public void Atualizar(ConexaoDB conexao, Product produto) throws SQLException{
+	public boolean Atualizar(ConexaoDB conexao, Product produto) throws SQLException{
 		try {
 			conexao.getConn().setAutoCommit(false); // Cancela a confirmação automática
-			String query = "";
+			String query = "UPDATE Product"
+					+ "SET nome_produto = ?, data_validade = ?, marca = ?, quantidade = ?, peso_produto =  ?, unidade = ?, valor = ?"
+					+ "WHERE codigo_barras = ?";
 			
-			Statement state = conexao.getConn().prepareStatement(query);
-			state.executeUpdate(query);
+			PreparedStatement state = conexao.getConn().prepareStatement(query);
+			state.setString(1, produto.getNomeProduto());
+			state.setDate(2, produto.getDataValidade());
+			state.setString(3, produto.getMarca());
+			state.setInt(4, produto.getQuantidade());
+			state.setDouble(5, produto.getPeso().getValorPeso());
+			state.setString(6, produto.getPeso().getMedida());
+			state.setDouble(7, produto.getValor());
+			state.setString(8,produto.getcodigoBarras());
 			
-			conexao.getConn().commit(); // Confirma as alterações
+			int la = state.executeUpdate(query); // la = "linhas afetadas"
+			if(la > 0) {
+				conexao.getConn().commit(); // Confirma as alterações
+				return true;
+			}
 			
 		}catch(SQLException e) {
 			conexao.getConn().rollback();
 			System.out.println("Algum erro aconteceu!");
 			System.out.print("Erro: " + e.getMessage());
 		}
+		return false;
 	}
 	
 	@Override

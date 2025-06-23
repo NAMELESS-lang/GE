@@ -8,7 +8,7 @@ public interface InterfaceProductDAO {
 	
 	public void Deletar(ConexaoDB conexao, Product product) throws SQLException;
 	
-	public void Atualizar(ConexaoDB conexao, Product product) throws SQLException;
+	public boolean Atualizar(ConexaoDB conexao, Product product) throws SQLException;
 	
 	public  boolean criarCodigobarras(ConexaoDB conexao, Product product) throws SQLException; 
 }
