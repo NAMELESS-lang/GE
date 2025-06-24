@@ -13,7 +13,8 @@ public class Product{
 		private Double valor;
 	
 		@JsonCreator
-		public Product( @JsonProperty("nome_produto") String nomeProduto, 
+		public Product( @JsonProperty("codigo_barras") String codigoBarras,
+						@JsonProperty("nome_produto") String nomeProduto, 
 						@JsonProperty("data_validade") Long dataValidade, 
 						@JsonProperty("marca") String marca, 
 						@JsonProperty("quantidade") Integer quantidade, 
@@ -22,6 +23,7 @@ public class Product{
 						@JsonProperty("valor") Double valor
 					  )
 					{
+						this.codigoBarra = codigoBarras;
 						this.nomeProduto = nomeProduto;
 						this.dataValidade = new Date(dataValidade);
 						this.marca = marca;
@@ -29,6 +31,18 @@ public class Product{
 						this.pesoProduto = new Peso(peso, unidade);
 						this.valor = valor;
 					}
+		
+		
+		public Product(String codigoBarras, String nomeProduto, Date dataValidade, String marca, Integer quantidade, Double peso, String unidade, Double valor)
+			{
+				this.codigoBarra = codigoBarras;
+				this.nomeProduto = nomeProduto;
+				this.dataValidade = dataValidade;
+				this.marca = marca;
+				this.quantidade = quantidade;
+				this.pesoProduto = new Peso(peso, unidade);
+				this.valor = valor;
+			}
 		
 		public void setCodigoBarras(String codigoBarras) {this.codigoBarra = codigoBarras;}
 		public void setNomeProduto(String nome_item) { this.nomeProduto = nome_item; }
@@ -49,6 +63,7 @@ public class Product{
 			String formatado = this.valor + "R$";
 			return formatado;
 		}
+		
 		
 		@Override
 		public String toString() {

@@ -1,11 +1,11 @@
 package model;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.PreparedStatement;
-
-import model.Product;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class ProductDAO implements InterfaceProductDAO{
@@ -44,13 +44,18 @@ public class ProductDAO implements InterfaceProductDAO{
 	}
 	
 	@Override
-	public void Deletar(ConexaoDB conexao, Product produto) throws SQLException{
+	public boolean Deletar(ConexaoDB conexao, Product produto) throws SQLException{
 		try {
 			conexao.getConn().setAutoCommit(false); // Cancela a confirmação automática
-			String query = "";
+			String query = "DELETE FROM Product p WHERE codigo_barras = ?";
 			
-			Statement state = conexao.getConn().prepareStatement(query);
-			state.executeUpdate(query);
+			PreparedStatement state = conexao.getConn().prepareStatement(query);
+			state.setString(1, produto.getcodigoBarras());
+			
+			int status = state.executeUpdate(query);
+			if(status > 0) {
+				return true;
+			}
 			
 			conexao.getConn().commit(); // Confirma as alterações
 			
@@ -59,13 +64,14 @@ public class ProductDAO implements InterfaceProductDAO{
 			System.out.println("Algum erro aconteceu!");
 			System.out.print("Erro: " + e.getMessage());
 		}
+		return false;
 	}
 	
 	@Override
 	public boolean Atualizar(ConexaoDB conexao, Product produto) throws SQLException{
 		try {
 			conexao.getConn().setAutoCommit(false); // Cancela a confirmação automática
-			String query = "UPDATE Product"
+			String query = "UPDATE Product "
 					+ "SET nome_produto = ?, data_validade = ?, marca = ?, quantidade = ?, peso_produto =  ?, unidade = ?, valor = ?"
 					+ "WHERE codigo_barras = ?";
 			
@@ -79,8 +85,8 @@ public class ProductDAO implements InterfaceProductDAO{
 			state.setDouble(7, produto.getValor());
 			state.setString(8,produto.getcodigoBarras());
 			
-			int la = state.executeUpdate(query); // la = "linhas afetadas"
-			if(la > 0) {
+			int la = state.executeUpdate(); // la = "linhas afetadas"
+			if(la > 0) { // se afetou alguma linha
 				conexao.getConn().commit(); // Confirma as alterações
 				return true;
 			}
@@ -92,6 +98,37 @@ public class ProductDAO implements InterfaceProductDAO{
 		}
 		return false;
 	}
+	
+	
+	@Override
+	public ArrayList<Product> Pesquisar(ConexaoDB conexao, String categoria, String input) throws SQLException{
+		List<Product> pd = new ArrayList<>();
+		
+		try {
+			conexao.getConn().setAutoCommit(false);
+			String query = "SELECT * FROM Product WHERE ? = ?";
+			PreparedStatement state = conexao.getConn().prepareStatement(query);
+			state.setString(1, categoria);
+			state.setString(2, input);
+			
+			ResultSet rs = state.executeQuery();
+			
+			while(rs.next()) {
+				Product produto = new Product(rs.getString("codigo_barras"),rs.getString("nome_produto"),rs.getDate("data_validade"),rs.getString("marca")
+						,rs.getInt("quantidade"),rs.getDouble("peso_produto"),rs.getString("unidade"),rs.getDouble("valor"));
+				pd.add(produto);
+			}
+			return (ArrayList<Product>) pd;
+		}catch(SQLException e) {
+			conexao.getConn().rollback();
+			System.out.println(e.getMessage());
+		}
+		return (ArrayList<Product>) pd;
+	}
+	
+	
+	
+	
 	
 	@Override
 	public boolean criarCodigobarras(ConexaoDB conexao, Product product) throws SQLException{
