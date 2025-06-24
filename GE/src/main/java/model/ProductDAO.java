@@ -101,18 +101,15 @@ public class ProductDAO implements InterfaceProductDAO{
 	
 	
 	@Override
-	public ArrayList<Product> Pesquisar(ConexaoDB conexao, String categoria, String input) throws SQLException{
+	public ArrayList<Product> Pesquisar(ConexaoDB conexao, JsonReciver jsonreciver) throws SQLException{
 		List<Product> pd = new ArrayList<>();
 		
 		try {
 			conexao.getConn().setAutoCommit(false);
-			String query = "SELECT * FROM Product WHERE ? = ?";
+			String query = "SELECT * FROM Product WHERE "+ jsonreciver.getCategoria()+" = ?";
 			PreparedStatement state = conexao.getConn().prepareStatement(query);
-			state.setString(1, categoria);
-			state.setString(2, input);
-			
+			state.setString(1, jsonreciver.getInput());
 			ResultSet rs = state.executeQuery();
-			
 			while(rs.next()) {
 				Product produto = new Product(rs.getString("codigo_barras"),rs.getString("nome_produto"),rs.getDate("data_validade"),rs.getString("marca")
 						,rs.getInt("quantidade"),rs.getDouble("peso_produto"),rs.getString("unidade"),rs.getDouble("valor"));
