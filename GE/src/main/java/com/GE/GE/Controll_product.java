@@ -31,7 +31,7 @@ public class Controll_product {
 				conexao.closeConn();
 				return "Produto cadastrado com sucesso";
 			}
-			throw new Exception("Houve um erro no processo!");
+			throw new SQLException("Houve um erro no processo!");
 		}catch(SQLException e) {
 			conexao.closeConn();
 			System.out.println(e.getMessage());
@@ -61,11 +61,11 @@ public class Controll_product {
 	}
 	
 	@PostMapping("/pesquisar")
-	public ArrayList<Product> buscar(@RequestBody Product produto) throws SQLException{
+	public ArrayList<Product> buscar(@RequestBody String categoria, String input) throws SQLException{
 		ArrayList<Product> lista = null;
 		try {
 			this.conexao.iniciarConexao();
-			lista = this.productdao.Pesquisar(this.conexao, null, null);
+			lista = this.productdao.Pesquisar(this.conexao, categoria, input);
 			return lista;
 			
 			
