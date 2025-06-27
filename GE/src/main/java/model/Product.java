@@ -65,10 +65,10 @@ public class Product{
 			return formatado;
 		}
 		
-		
 		@Override
 		public String toString() {
-			return "Nome:"+this.codigoBarra;
+			return "Código barras: "+this.codigoBarra + " Nome do produto: "+this.nomeProduto+" Data de validade: "+this.dataValidade+" Marca: "+this.marca+
+					" Quantidade: "+this.quantidade+this.pesoProduto.toString();
 			
 		}
 		
@@ -92,6 +92,11 @@ public class Product{
 		
 		public String getProdutoformatado(){
 			return this.valorPeso + this.medida;
+		}
+		
+		@Override
+		public String toString() {
+			return "Peso: "+this.valorPeso+" "+this.medida;
 		}
 		}
 }

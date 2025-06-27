@@ -37,7 +37,6 @@ public class ProductDAO implements InterfaceProductDAO{
 			}
 		}catch(SQLException e) {
 			conexao.getConn().rollback();
-			System.out.println("Algum erro aconteceu!");
 			System.out.print("Erro: " + e.getMessage());
 		}
 		return false;
@@ -47,21 +46,18 @@ public class ProductDAO implements InterfaceProductDAO{
 	public boolean Deletar(ConexaoDB conexao, Product produto) throws SQLException{
 		try {
 			conexao.getConn().setAutoCommit(false); // Cancela a confirmação automática
-			String query = "DELETE FROM Product p WHERE codigo_barras = ?";
+			String query = "DELETE FROM Product WHERE codigo_barras = ?";
 			
 			PreparedStatement state = conexao.getConn().prepareStatement(query);
-			state.setString(1, produto.getcodigoBarras());
+			state.setString(1, produto.getcodigoBarras()); // Associa o código de barras ao comando SQL
 			
-			int status = state.executeUpdate(query);
-			if(status > 0) {
+			int status = state.executeUpdate();
+			if(status > 0) { // Caso a operação afetou alguma linha do db, então deletou o item correspondente
+				conexao.getConn().commit(); // Confirma as alterações
 				return true;
 			}
-			
-			conexao.getConn().commit(); // Confirma as alterações
-			
 		}catch(SQLException e) {
 			conexao.getConn().rollback();
-			System.out.println("Algum erro aconteceu!");
 			System.out.print("Erro: " + e.getMessage());
 		}
 		return false;
@@ -105,17 +101,20 @@ public class ProductDAO implements InterfaceProductDAO{
 		List<Product> pd = new ArrayList<>();
 		
 		try {
-			conexao.getConn().setAutoCommit(false);
+			conexao.getConn().setAutoCommit(false); // Cancela a confirmação automática
 			String query = "SELECT * FROM Product WHERE "+ jsonreciver.getCategoria()+" = ?";
 			PreparedStatement state = conexao.getConn().prepareStatement(query);
 			state.setString(1, jsonreciver.getInput());
-			ResultSet rs = state.executeQuery();
+			
+			ResultSet rs = state.executeQuery(); // Obtém os dados do db
+			
 			while(rs.next()) {
 				Product produto = new Product(rs.getString("codigo_barras"),rs.getString("nome_produto"),rs.getDate("data_validade"),rs.getString("marca")
 						,rs.getInt("quantidade"),rs.getDouble("peso_produto"),rs.getString("unidade"),rs.getDouble("valor"));
-				pd.add(produto);
+				pd.add(produto); // Cria cada um dos objetos com os dados e os insere na ArrayList
 			}
-			return (ArrayList<Product>) pd;
+			conexao.getConn().commit();
+			return (ArrayList<Product>) pd; 
 		}catch(SQLException e) {
 			conexao.getConn().rollback();
 			System.out.println(e.getMessage());
@@ -138,7 +137,7 @@ public class ProductDAO implements InterfaceProductDAO{
 			boolean repeat = true; // Variável responsável por repetir o loop de criação do código barras
 			
 			
-			while(repeat == true) {
+			while(repeat == true) { // estrutura usada para analisar se o código já existe no db, e caso exista é criado um novo valor até que haja um inexistente
 				for(int i =0; i<5;i++) { //Cria o código de barras com números aleatórios
 					codigo.append(r.nextInt(10));
 				}
@@ -147,6 +146,7 @@ public class ProductDAO implements InterfaceProductDAO{
 				
 				ResultSet result = state.executeQuery(); // Armazena o resultado
 				if(result.next()) {
+					codigo.delete(0, codigo.length());
 					continue;
 				}
 				product.setCodigoBarras(codigo.toString());
