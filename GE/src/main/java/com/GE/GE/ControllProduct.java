@@ -15,7 +15,7 @@ import model.ProductDAO;
 import model.JsonReciver;
 
 @RestController // define que esta classe trabalha com requisições de API REST
-public class Controll_product {
+public class ControllProduct {
 	
 	public ConexaoDB conexao = new ConexaoDB("localhost","matheus","1234","TESTE");
 	public ProductDAO productdao = new ProductDAO();
@@ -70,8 +70,7 @@ public class Controll_product {
 			this.conexao.iniciarConexao();
 			lista = this.productdao.Pesquisar(this.conexao,jsonreciver);
 			return lista;
-			
-			
+
 		}catch(SQLException e) {
 			conexao.closeConn();
 			System.out.println(e.getMessage());
