@@ -1,6 +1,5 @@
 package com.GE.GE;
 
-import java.sql.SQLException;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,16 +12,16 @@ public class ControllReports {
 
 	public ConexaoDB conexao = new ConexaoDB("localhost","matheus","1234","TESTE");
 	public Reports report = new Reports();
-	@PostMapping("/lucro_total")
-	public Double obterLucro() throws SQLException {
+	@PostMapping("/gerar_relatorios")
+	public Reports gerarRelatorios(){
 		try {
 			this.conexao.iniciarConexao();
 			
-			Double valor = this.report.getValorTotal(this.conexao);
+			this.report.geraRelatorios(this.conexao);
 			this.conexao.closeConn();
-			
-			return valor;
-	}catch(SQLException e) {
+
+			return this.report;
+	}catch(Exception e) {
 		System.out.println(e.getMessage());
 		return null;
 	}
