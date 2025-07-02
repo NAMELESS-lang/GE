@@ -5,7 +5,6 @@ function notificacao(mensagem){
     p_mensagem.textContent = mensagem;
     main.insertBefore(p_mensagem, form);
 }
-
 function cadastrar(){
     let form = new FormData(document.getElementById('form_cadastro'));
     let dados = {};
