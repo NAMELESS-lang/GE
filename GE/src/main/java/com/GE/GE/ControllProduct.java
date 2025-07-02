@@ -21,7 +21,7 @@ public class ControllProduct {
 	public ProductDAO productdao = new ProductDAO();
 	
 	@PostMapping("/cadastrar") // Caso o método seja POST este método é chamado
-	public String Cadastrar(@RequestBody Product produto) throws SQLException { // Recebe como argumento o JSON da requisição http e usa automaticamento no construtor do produto
+	public String Cadastrar(@RequestBody Product produto) { // Recebe como argumento o JSON da requisição http e usa automaticamento no construtor do produto
 		String message = "Houve um erro no cadastro, tente novamente!";
 		try {
 			// Crio o objeto conexão e o inicio, assim como o DAO
@@ -35,8 +35,7 @@ public class ControllProduct {
 				return "Produto cadastrado com sucesso";
 			}
 			throw new SQLException("Houve um erro no processo!");
-		}catch(SQLException e) {
-			conexao.closeConn();
+		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			return message;
 		}
@@ -56,8 +55,7 @@ public class ControllProduct {
 			
 			conexao.closeConn();
 			return "";
-		}catch(SQLException e) {
-			conexao.closeConn();
+		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			return "Erro ao cadastrar o produto, tente novamente!";
 		}
@@ -71,8 +69,7 @@ public class ControllProduct {
 			lista = this.productdao.Pesquisar(this.conexao,jsonreciver);
 			return lista;
 
-		}catch(SQLException e) {
-			conexao.closeConn();
+		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			return lista;
 		}
@@ -87,8 +84,7 @@ public class ControllProduct {
 				return "Produto deletado com sucesso!";
 			}
 			throw new SQLException("Deu algum erro!");
-		}catch(SQLException e) {
-			conexao.closeConn();
+		}catch(Exception e){
 			System.out.println(e.getMessage());
 			return "Erro ao deletar o produto!";
 		}

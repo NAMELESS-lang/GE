@@ -35,7 +35,6 @@ public class ReportsDAO implements InterfaceReportsDAO{
 			PreparedStatement state = conexao.getConn().prepareStatement(query);
 			ResultSet rs = state.executeQuery();
 			return rs.getInt(0);
-			
 	}catch(SQLException e) {
 		conexao.getConn().rollback();
 		System.out.println(e.getMessage());
