@@ -7,44 +7,48 @@
     <link rel="stylesheet" href="../style/cadastro_item.css">
 </head>
 <body>
+    <header>
+        <h1>BEM-VINDO</h1>
+        <nav>
+            <a class="cadastrar" href="">Cadastrar</a>
+            <a class="pesquisar" href="">Pesquisar</a>
+            <a class="deletar" href="">Deletar</a>
+            <a class="atualizar" href="">Atualizar</a>
+        </nav>
+    </header>
     <main id="principal">
-        <aside>
-            <h1>Ações</h1>
-            <nav>
-                <a href="">Pesquisar</a>
-                <a href="">Atualizar</a>
-                <a href="">Deletar</a>
-            </nav>
-        </aside>
+        <h2 class="titulo">Cadastro</h2>
         <form id="form_cadastro">
-            <h2>Cadastro</h2>
-            <label for="nome_produto">Nome do produto:</label>
-            <input name="nome_produto" type="text" required>
+            <div>
+                <label for="nome_produt o">Nome do produto:</label>
+                <input name="nome_produto" type="text" required>
 
-            <label for="data_validade">Data de validade:</label>
-            <input name="data_validade" type="date" required>
+                <label for="data_validade">Data de validade:</label>
+                <input name="data_validade" type="date" required>
 
-            <label for="marca">Marca:</label>
-            <input marca="marca" type="text" required>
+                <label for="marca">Marca:</label>
+                <input marca="marca" type="text" required>
 
-            <label for="quantidade">Quantidade:</label>
-            <input name="quantidade" type="number" min="1" required>
+                <label for="quantidade">Quantidade:</label>
+                <input name="quantidade" type="number" min="1" required>
+            </div>
+            <div>
+                <label for="peso_produto">Peso do produto:</label>
+                <input name="peso_produto" type="number" min="1" required>
+                
+                <select name="unidade" required>
+                    <option value="kg">Kg</option>
+                    <option value="g">g</option>
+                    <option value="l">L</option>
+                    <option value="ml">ml</option>
+                    <option value="un">un</option>
+                </select>
 
-            <label for="peso_produto">Peso do produto:</label>
-			<input name="peso_produto" type="number" min="1" required>
-			
-            <select name="unidade" required>
-                <option value="kg">Kg</option>
-                <option value="g">g</option>
-                <option value="l">L</option>
-                <option value="ml">ml</option>
-                <option value="un">un</option>
-            </select>
+                <label for="valor">Valor</label>
+                <input name="valor" type="number" required>
 
-            <label for="valor">Valor</label>
-            <input name="valor" type="number" required>
-
-            <button type="submit">Cadastrar produto</button>
+                <button type="submit">Cadastrar produto</button>
+            </div>
         </form>
     </main>
     <script src="../static/javascript/cadastro_item.js"></script>

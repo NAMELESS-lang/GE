@@ -1,58 +1,85 @@
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+:root{
+    --buttons: rgb(6, 119, 128);
+    --cor-buttons-nav: whitesmoke;  
 }
+
+body{
+    position: absolute;
+    z-index: 0;
+}
+header{
+    position: relative;
+    z-index: 2;
+    top: 12vh;
+    left: 7%;
+ }
+nav{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 10px;
+    margin-right: 0.5%;
+}
+
+ .cadastrar, .deletar, .atualizar, .pesquisar{
+    text-decoration: none;
+    color: var(--cor-buttons-nav);
+    border-radius: 3px; 
+    padding: 2%;
+ }
+
+ .cadastrar{
+    background-color: var(--buttons);
+ }
+
+ .atualizar{
+    background-color: var(--buttons);
+ }
+
+ .deletar{
+    background-color: var(--buttons)
+ }
+ .pesquisar{
+    background-color: var(--buttons);
+ }
+
+ nav a:hover{
+    transform: scale(1.1);
+    z-index: 1;
+ }
 
 main{
-    display: flex;
-    justify-content: space-around;
-    width: 100vw;
-    height: 100vh;
-}
-
-aside nav{
-    display: flex;
-    flex-direction: column;
-}
-
-aside nav a{
-    font-size: 2em;
-    text-decoration: none;
-}
-
-form{
+    z-index: 1;
+    left: 7%;
     position: relative;
-    width: 50%;
-    height: 50%;
+    top: 9vh;
+    width: 85vw;
+    height: 70vh;
+    border: 1px solid black;
+}
+.titulo{
+    margin-left: 25%;
+
+}
+form{
+    display: flex;
+   justify-content: space-around;
+   align-items: center;
+   height: 80%;
+}
+
+form div{
     display: flex;
     flex-direction: column;
+    width: 45%;
+    height: 90%;
+    border: 1px solid black;    
 }
 
-form h2{
-    text-align: center;
-
+label{
+    height: 10%;
 }
 
-form label{
-    font-size: 1.2em;
-    color: whitesmoke;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: rgb(7, 7, 41);
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-
-
-form input{
-    font-size: 1.2em;
-}
-
-form button{
-    
-    width: 30%;
-    font-size: 1.3em;
-    margin-top: 10px;
-    text-decoration: none;
+input{
+    height: 5%;
 }
