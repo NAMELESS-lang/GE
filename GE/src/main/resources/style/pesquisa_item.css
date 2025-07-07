@@ -41,3 +41,16 @@
     border-radius: 5px;
     font-size: 1.7em;
 }
+
+.destacar_pesquisar, .destacar_deletar{
+    position: relative;
+    top: 20px;
+}
+
+.destacar_deletar{
+    background-color: var(--deletar);
+}
+
+.destacar_pesquisar{
+    background-color: var(--pesquisar);
+}
