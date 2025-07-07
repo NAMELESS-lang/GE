@@ -1,66 +1,77 @@
 :root{
     --buttons: rgb(6, 119, 128);
+    --buttons_dois: #8b8686;
     --cor-buttons-nav: whitesmoke;  
 }
 
 body{
-    position: absolute;
     z-index: 0;
+    background-color: whitesmoke;
 }
-header{
-    position: relative;
-    z-index: 2;
-    top: 12vh;
-    left: 7%;
- }
-nav{
+
+.div_relatorios{
     display: flex;
     justify-content: right;
+}
+
+table thead th{
+    background-color: #0097b2;
+}
+
+table th{
+    border: 1px solid black;
+    padding: 15px;
+    font-size: 1.4em;
+}
+
+header{
+    position: relative;
+    z-index: 2  ;
+    top: 3vh;
+ }
+
+ .titulo_principal{
+    padding-left: 20%;
+ }
+
+nav{
+    position: relative;
+    display: flex;
+    justify-content: right;
+    margin-right: 8%;
     align-items: center;
-    gap: 10px;
-    margin-right: 0.5%;
+    gap: 15px;
 }
 
  .cadastrar, .deletar, .atualizar, .pesquisar{
     text-decoration: none;
     color: var(--cor-buttons-nav);
+    background-color: var(--buttons_dois);
     border-radius: 3px; 
-    padding: 2%;
- }
-
- .cadastrar{
-    background-color: var(--buttons);
- }
-
- .atualizar{
-    background-color: var(--buttons);
- }
-
- .deletar{
-    background-color: var(--buttons)
- }
- .pesquisar{
-    background-color: var(--buttons);
+    padding: 3%;
+    color: rgb(24, 22, 22);
+    font-size: 1.6em;
  }
 
  nav a:hover{
     transform: scale(1.1);
-    z-index: 1;
  }
 
 main{
     z-index: 1;
     left: 7%;
     position: relative;
-    top: 9vh;
     width: 85vw;
     height: 70vh;
     border: 1px solid black;
+    border-radius: 5px;
 }
-.titulo{
-    margin-left: 25%;
 
+.titulo{
+    margin-left: 20%;
+    font-size: 2.4em;
 }
+
 form{
     display: flex;
    justify-content: space-around;
@@ -72,14 +83,39 @@ form div{
     display: flex;
     flex-direction: column;
     width: 45%;
-    height: 90%;
-    border: 1px solid black;    
+    height: 90%;   
 }
 
 label{
+    margin-top: 1%;
     height: 10%;
+    background-color: rgb(4, 100, 4);
+    color: white;
+    padding-top: 2%;
+    font-size: 1.6em;
+    width: 60%;
+    border-radius: 5px;
+    margin-bottom: 2%;
 }
 
 input{
-    height: 5%;
+    height: 10%;
+    margin-bottom: 1%;
+    font-size: 1.2em;
+    width: 80%;
+}
+
+select{
+    height: 10%;
+    width: 80%;
+}
+
+button{
+    background-color: aquamarine;
+    height: 10%;
+    font-size: 1.3em;
+    border: none;
+}
+button:hover{
+    background-color: blue;
 }

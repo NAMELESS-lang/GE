@@ -36,3 +36,4 @@ document.getElementById('form_cadastro').addEventListener('submit',function(even
     event.preventDefault();
     cadastrar();
 })
+

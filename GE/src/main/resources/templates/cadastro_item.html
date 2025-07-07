@@ -5,20 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro item</title>
     <link rel="stylesheet" href="../style/cadastro_item.css">
+    <link rel="stylesheet" href="../style/pesquisa_item.css">
 </head>
 <body>
+    <div class="div_relatorios">
+        <table>
+            <thead>
+                <td>
+                    <th>Valor total em estoque (R$)</th>
+                </td>
+                <td>
+                    <th> Total de itens em estoque </th>
+                </td>
+                <td>
+                    <th> Itens acabando </th>
+                </td>
+                <td>
+                    <th> Itens vencendo </th>
+                </td>
+            </thead>
+            <tbody>
+                <td>
+                    <th> 5400,00 R$</th>
+                </td>
+                <td>
+                    <th> 1300 </th>
+                </td>
+                <td>
+                    <th> 100 </th>
+                </td>
+                <td>
+                    <th> 30 </th>
+                </td>
+            </tbody>
+        </table>
+    </div>
     <header>
-        <h1>BEM-VINDO</h1>
-        <nav>
-            <a class="cadastrar" href="">Cadastrar</a>
-            <a class="pesquisar" href="">Pesquisar</a>
-            <a class="deletar" href="">Deletar</a>
-            <a class="atualizar" href="">Atualizar</a>
+        <h1 class="titulo_principal">BEM-VINDO</h1>
+         <nav>
+            <a class="cadastrar" href=""><b>Cadastrar</b></a>
+            <a class="pesquisar" onclick="criar_pesquias()"><b>Pesquisar</b></a>
+            <a class="deletar" onclick="criar_deletar()"><b>Deletar</b></a>
+            <a class="atualizar" onclick="criar_atualizar()"><b>Atualizar</b></a>
         </nav>
     </header>
     <main id="principal">
-        <h2 class="titulo">Cadastro</h2>
-        <form id="form_cadastro">
+        <h2 id="titulo_funcao" class="titulo">Cadastro</h2>
+        <form id="form">
             <div>
                 <label for="nome_produt o">Nome do produto:</label>
                 <input name="nome_produto" type="text" required>
@@ -35,7 +68,8 @@
             <div>
                 <label for="peso_produto">Peso do produto:</label>
                 <input name="peso_produto" type="number" min="1" required>
-                
+
+                <label for="unidade">Unidade: </label>
                 <select name="unidade" required>
                     <option value="kg">Kg</option>
                     <option value="g">g</option>
@@ -44,7 +78,7 @@
                     <option value="un">un</option>
                 </select>
 
-                <label for="valor">Valor</label>
+                <label for="valor">Valor:</label>
                 <input name="valor" type="number" required>
 
                 <button type="submit">Cadastrar produto</button>
@@ -52,5 +86,8 @@
         </form>
     </main>
     <script src="../static/javascript/cadastro_item.js"></script>
+    <script src="../static/javascript/pesquisa.js"></script>
+    <script src="../static/javascript/deletar.js"></script>
+    <script src="../static/javascript/atualizar.js"></script>
 </body>
 </html>
