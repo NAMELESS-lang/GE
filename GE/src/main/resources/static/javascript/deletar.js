@@ -27,8 +27,6 @@ function criar_deletar(){
     let form_atual = document.getElementById('form');
     let titulo_funcao = document.getElementById('titulo_funcao');
     titulo_funcao.textContent="Deletar";
-    let botao_selecionado = document.getElementById('deletar');
-    botao_selecionado.classList.add("destacar_deletar");
     main.removeChild(form_atual); 
     main.appendChild(form);
     return

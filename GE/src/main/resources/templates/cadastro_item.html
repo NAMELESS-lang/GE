@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro item</title>
+    <link rel="stylesheet" href="../style/main.css">
     <link rel="stylesheet" href="../style/cadastro_item.css">
     <link rel="stylesheet" href="../style/pesquisa_item.css">
 </head>
@@ -44,16 +45,16 @@
         <h1 class="titulo_principal">BEM-VINDO</h1>
          <nav>
             <a class="cadastrar" href=""><b>Cadastrar</b></a>
-            <a id="pesquisar" class="pesquisar" onclick="criar_pesquias()"><b>Pesquisar</b></a>
-            <a id="deletar" class="deletar" onclick="criar_deletar()"><b>Deletar</b></a>
+            <a class="pesquisar" onclick="criar_pesquias()"><b>Pesquisar</b></a>
+            <a class="deletar" onclick="criar_deletar()"><b>Deletar</b></a>
             <a class="atualizar" onclick="criar_atualizar()"><b>Atualizar</b></a>
         </nav>
     </header>
     <main id="principal">
         <h2 id="titulo_funcao" class="titulo">Cadastro</h2>
         <form id="form">
-            <div>
-                <label for="nome_produt o">Nome do produto:</label>
+            <div id="div1">
+                <label for="nome_produto">Nome do produto:</label>
                 <input name="nome_produto" type="text" required>
 
                 <label for="data_validade">Data de validade:</label>
@@ -65,7 +66,7 @@
                 <label for="quantidade">Quantidade:</label>
                 <input name="quantidade" type="number" min="1" required>
             </div>
-            <div>
+            <div id="div2">
                 <label for="peso_produto">Peso do produto:</label>
                 <input name="peso_produto" type="number" min="1" required>
 

@@ -37,3 +37,65 @@ document.getElementById('form_cadastro').addEventListener('submit',function(even
     cadastrar();
 })
 
+
+function criar_cadastro(){
+    let main = document.getElementById("principal");
+    let formulario_cadastro = document.createElement('form');
+    let div1, div2 = document.createElement('div');
+
+    campos_input_div1 = {
+        "Nome do produto" : "nome_produto",
+        "Data de validade" : "data_validade",
+        "Marca" : "marca",
+        "Quantidade" : "quantidade"}
+
+    campos_input_div2 = {
+        "Peso do produto" : "peso_produto",
+        "Unidade" : "unidade",
+        "Valor" : "valor"
+    }
+
+    campos_input_div1.forEach((chave, valor) => {
+        let label = document.createElement('label');
+        label.textContent = chave;
+        label.setAttribute("for", valor);
+
+        let input = document.createElement('input');
+        if(key == "nome_produto" || key == "marca"){
+                input.type = "text";
+        }else if(key == "data_validade"){
+            input.type = "date";
+        }else{
+            input.type = "number";
+        }
+        div1.appendChild(label, input);
+    });
+
+
+    campos_input_div2.forEach((chave, valor) =>{
+        if(key != "undidade"){
+            let label = document.createElement('label');
+            label.setAttribute("for", valor);
+            label.textContent = chave;
+
+            let input = document.createElement('input');
+            input.type = "number";
+
+            div2.appendChild(label, input);
+        }else{
+            opcoes = ["Kg","g","L","ml","Un"];
+            let select = document.createElement('select');
+            
+            opcoes.forEach(valor => {
+                let option = document.createElement('option');
+                option.value = valor;
+                option.textContent = valor;
+                select.appendChild(option);
+            });
+            div2.appendChild(select);
+        }
+    });
+
+    formulario_cadastro.appendChild(div1, div2);
+    main.appendChild(formulario_cadastro);
+}

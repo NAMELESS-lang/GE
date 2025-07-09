@@ -1,0 +1,75 @@
+:root{
+    --buttons: rgb(6, 119, 128);
+    --buttons_dois: #8b8686;
+    --cor-buttons-nav: whitesmoke;  
+}
+
+body{
+    z-index: 0;
+    background-color: whitesmoke;
+}
+
+.div_relatorios{
+    display: flex;
+    justify-content: right;
+}
+
+table thead th{
+    background-color: #0097b2;
+}
+
+table th{
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 1.4em;
+}
+
+header{
+    position: relative;
+    z-index: 2  ;
+    top: 3vh;
+}
+
+.titulo_principal{
+    padding-left: 20%;
+}
+
+nav{
+    position: relative;
+    display: flex;
+    justify-content: right;
+    margin-right: 8%;
+    align-items: center;
+    gap: 15px;
+}
+
+ .cadastrar, .deletar, .atualizar, .pesquisar{
+    text-decoration: none;
+    color: var(--cor-buttons-nav);
+    background-color: var(--buttons_dois);
+    border-radius: 3px; 
+    padding: 2%;
+    color: rgb(24, 22, 22);
+    font-size: 1.6em;
+ }
+
+ nav a:hover{
+    position: relative;
+    top: 20px;
+    transform: scale(1.1);
+ }
+
+main{
+    z-index: 1;
+    left: 7%;
+    position: relative;
+    width: 85vw;
+    height: 70vh;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.titulo{
+    margin-left: 20%;
+    font-size: 2.4em;
+}

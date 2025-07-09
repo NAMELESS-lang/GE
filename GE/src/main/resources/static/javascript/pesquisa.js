@@ -26,8 +26,6 @@ function criar_pesquias(){
     let main = document.getElementById('principal');
     let form_atual = document.getElementById('form');
     let titulo_funcao = document.getElementById('titulo_funcao');
-    let botao_selecionado = document.getElementById('pesquisar');
-    botao_selecionado.classList.add("destacar_pesquisar");
     titulo_funcao.textContent="Pesquisar";
     main.removeChild(form_atual); 
     main.appendChild(form);
