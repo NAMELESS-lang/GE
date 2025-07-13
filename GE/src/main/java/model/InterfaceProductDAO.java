@@ -13,6 +13,6 @@ public interface InterfaceProductDAO {
 	
 	public ArrayList<Product> Pesquisar(ConexaoDB conexao, JsonReciver jsonreciver) throws SQLException;
 	
-	public  boolean criarCodigobarras(ConexaoDB conexao, Product product) throws SQLException; 
+	public boolean consultarCodigoBarras(ConexaoDB conexao, String codigoBarras) throws SQLException;
 	
 }

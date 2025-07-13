@@ -13,11 +13,11 @@ public class JsonReciver {
 		this.input = input;
 	}
 	
-	public String getCategoria() { return categoria;}
+	public String getCategoria() { return categoria; }
 
-	public void setCategoria(String categoria) { this.categoria = categoria;}
+	public void setCategoria(String categoria) { this.categoria = categoria; }
 
-	public String getInput() { return input;}
+	public String getInput() { return input; }
 
-	public void setInput(String input) { this.input = input;}
+	public void setInput(String input) { this.input = input; }
 }

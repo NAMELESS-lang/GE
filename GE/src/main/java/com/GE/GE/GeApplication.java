@@ -14,10 +14,5 @@ public class GeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GeApplication.class, args);
 	}
-	
-	@GetMapping("/cadastro")
-	public String ola() {
-		return "cadastro_item";
-	}
 
 }

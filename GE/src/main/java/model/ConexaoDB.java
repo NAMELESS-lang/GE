@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 
-public class ConexaoDB{
+public class ConexaoDB implements AutoCloseable{
 	private String endereco_servidor;
 	private String name;
 	private String password;
@@ -36,22 +36,23 @@ public class ConexaoDB{
 		return false;
 	}
 	
-	public Connection getConn() { // Quando precisar usar a conexao do banco de dados, este método é chamado
+	public Connection getConn() { // Quando precisar usar a conexao com o  banco de dados, este método é chamado
 		return this.conn;
 	}
 	
-	public boolean closeConn() throws SQLException{
+	
+	// SOBRESCREVENDO O METODO DA INTERFACE IMPLEMENTADA PARA USAR NO TRY-WITH-RESOURCES
+	@Override
+	public void close() throws SQLException {
 		try {
 			if(conn != null) {
 				this.conn.close();
 				this.conn = null;
-				return true;
 			}
 		}
 	catch(SQLException e) {
 		System.out.println(e.getMessage());
 	}
-		return false;
 	}
 }
 
