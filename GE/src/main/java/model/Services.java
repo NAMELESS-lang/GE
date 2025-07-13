@@ -9,20 +9,16 @@ import java.util.Random;
 
 public class Services {
 	private ProductDAO productDAO;
-	private Reports report;
 	
 	Services(){
 		this.productDAO = new ProductDAO();
-		this.report = new Reports();	
 	}
 	
 	// GETTERS 
 	public ProductDAO getProductdao() { return productDAO; }
-	public Reports getReport() { return report; }
 	
 	// SETTERS
 	public void setProductdao(ProductDAO productdao) { this.productDAO = productdao; }
-	public void setReport(Reports report) { this.report = report; }
 	
 	public void criarCodigobarras(Product product){
 			
@@ -73,7 +69,10 @@ public class Services {
 				
 			conexao.getConn().setAutoCommit(false);
 			
-			return this.productDAO.atualizar(conexao, product);
+			 if(this.productDAO.atualizar(conexao, product)) {
+				 conexao.getConn().commit();
+				 return true;
+			 }
 				
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
@@ -87,6 +86,7 @@ public class Services {
 			conexao.getConn().setAutoCommit(false);
 			ArrayList<Product> listaProdutos = this.productDAO.pesquisar(conexao,category); 
 			if( listaProdutos != null) {
+				conexao.getConn().commit();
 				return listaProdutos;
 			}
 			return null;
