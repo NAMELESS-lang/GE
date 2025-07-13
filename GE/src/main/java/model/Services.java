@@ -32,6 +32,7 @@ public class Services {
 	
 	public boolean cadastrarProduct(Product product) throws SQLException {
 		try(ConexaoDB conexao = new ConexaoDB("localhost","matheus", "1234", "TESTE")){
+			
 			conexao.getConn().setAutoCommit(false);
 			this.criarCodigobarras(product);
 			while(this.productDAO.consultarCodigoBarras(conexao, product.getcodigoBarras())) {
