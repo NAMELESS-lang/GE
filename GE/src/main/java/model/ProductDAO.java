@@ -11,14 +11,13 @@ import java.util.Random;
 public class ProductDAO implements InterfaceProductDAO{
 
 	@Override
-	public boolean Cadastrar(ConexaoDB conexao,Product produto) throws SQLException {
+	public boolean cadastrar(ConexaoDB conexao,Product produto) throws SQLException {
+			String query = "insert into product(codigo_barras, nome_produto, data_validade, marca, quantidade, peso, unidade_peso, altura, largura, comprimento, valor)"+
+					"VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 			
-			conexao.getConn().setAutoCommit(false); // Cancela confirmação automática
-			String query = "INSERT INTO Product (codigo_barras, nome_produto ,data_validade ,marca, quantidade , peso_produto, unidade, valor)"
-					+ "VALUES(?,?,?,?,?,?,?,?)";
 			
-			// Relaciona os parâmetros
 			PreparedStatement state = conexao.getConn().prepareStatement(query);
+			
 			state.setString(1, produto.getcodigoBarras());
 			state.setString(2,produto.getNomeProduto());
 			state.setDate(3, produto.getDataValidade());
@@ -26,67 +25,67 @@ public class ProductDAO implements InterfaceProductDAO{
 			state.setInt(5,produto.getQuantidade());
 			state.setDouble(6, produto.getPeso().getValorPeso());
 			state.setString(7, produto.getPeso().getMedida());
-			state.setDouble(8, produto.getValor());
+			state.setDouble(8, produto.getDimensoes().getAltura());
+			state.setDouble(9, produto.getDimensoes().getComprimento());
+			state.setDouble(10, produto.getDimensoes().getLargura());
+			state.setDouble(11, produto.getValor());
 			
-			// Executa a instrução SQL
-			int status = state.executeUpdate();
-			if(status > 0) {
-				return true;
-			}
-			return false;
+
+			return state.execute();
 	}
 	
 	@Override
-	public boolean Deletar(ConexaoDB conexao, Product produto) throws SQLException{
-			conexao.getConn().setAutoCommit(false); // Cancela a confirmação automática
-			String query = "DELETE FROM Product WHERE codigo_barras = ?";
+	public boolean deletar(ConexaoDB conexao, Product produto) throws SQLException{
+			String query = "DELETE FROM product WHERE codigo_barras = ?";
 			
 			PreparedStatement state = conexao.getConn().prepareStatement(query);
-			state.setString(1, produto.getcodigoBarras()); // Associa o código de barras ao comando SQL
+			state.setString(1, produto.getcodigoBarras()); 
 			
 			int status = state.executeUpdate();
-			if(status > 0) { // Caso a operação afetou alguma linha do db, então deletou o item correspondente
-				conexao.getConn().commit(); // Confirma as alterações
-				return true;
-			}
-			return false;
+			return status > 0 ? true : false;
 	}
 	
 	@Override
-	public boolean Atualizar(ConexaoDB conexao, Product produto) throws SQLException{
-			conexao.getConn().setAutoCommit(false); // Cancela a confirmação automática
-			String query = "UPDATE Product "
-					+ "SET nome_produto = ?, data_validade = ?, marca = ?, quantidade = ?, peso_produto =  ?, unidade = ?, valor = ?"
-					+ "WHERE codigo_barras = ?";
-			
-			PreparedStatement state = conexao.getConn().prepareStatement(query);
-			state.setString(1, produto.getNomeProduto());
-			state.setDate(2, produto.getDataValidade());
-			state.setString(3, produto.getMarca());
-			state.setInt(4, produto.getQuantidade());
-			state.setDouble(5, produto.getPeso().getValorPeso());
-			state.setString(6, produto.getPeso().getMedida());
-			state.setDouble(7, produto.getValor());
-			state.setString(8,produto.getcodigoBarras());
-			
-			int la = state.executeUpdate(); // la = "linhas afetadas"
-			if(la > 0) { // se afetou alguma linha
-				return true;
-			}
-		return false;
-	}
-	
-	
-	@Override
-	public ArrayList<Product> Pesquisar(ConexaoDB conexao, JsonReciver jsonreciver) throws SQLException{
-		List<Product> pd = new ArrayList<>();
-		conexao.getConn().setAutoCommit(false); // Cancela a confirmação automática
-		String query = "SELECT * FROM Product WHERE "+ jsonreciver.getCategoria()+" = ?";
-		PreparedStatement state = conexao.getConn().prepareStatement(query);
-		state.setString(1, jsonreciver.getInput());
+	public boolean atualizar(ConexaoDB conexao, Product produto) throws SQLException{
+		String query = "update product" + 
+					   "set nome_produto = ?, data_validade = ?, marca = ?, quantidade = ?, peso = ?, unidade_peso = ?, altura = ?, largura = ?, comprimento = ?, valor = ?"+
+					   "where codigo_barras = ?"; 
 		
-		ResultSet rs = state.executeQuery(); // Obtém os dados do db
-		return (ArrayList<Product>) pd; 
+		PreparedStatement state = conexao.getConn().prepareStatement(query);
+		
+		state.setString(1, produto.getNomeProduto());
+		state.setDate(2, produto.getDataValidade());
+		state.setString(3, produto.getMarca());
+		state.setInt(4, produto.getQuantidade());
+		state.setDouble(5, produto.getPeso().getValorPeso());
+		state.setString(6, produto.getPeso().getMedida());
+		state.setDouble(7, produto.getDimensoes().getAltura());
+		state.setDouble(8, produto.getDimensoes().getLargura());
+		state.setDouble(9, produto.getDimensoes().getComprimento());
+		state.setDouble(10, produto.getValor());
+		state.setString(11,produto.getcodigoBarras());
+		
+		int la = state.executeUpdate();
+		return la > 0 ?  true : false;
+	}
+	
+	@Override
+	public ArrayList<Product> pesquisar(ConexaoDB conexao, Category category) throws SQLException{
+		List<Product> pd = new ArrayList<>();
+		String query = "SELECT * FROM product WHERE "+ category.getCategoria()+" = ?";
+		PreparedStatement state = conexao.getConn().prepareStatement(query);
+		state.setString(1, category.getInput());
+		
+		ResultSet rs = state.executeQuery();
+		if(rs.next()) {
+		while(rs.next()) {
+			Product produto = new Product(rs);
+			pd.add(produto);		
+		}
+			return (ArrayList<Product>) pd;
+		}else {
+			return null;
+		}
 	}
 
 	@Override

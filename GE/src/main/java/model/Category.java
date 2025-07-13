@@ -3,12 +3,12 @@ package model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JsonReciver {
+public class Category {
 	private String categoria;
 	private String input;
 	
 	@JsonCreator
-	public JsonReciver(@JsonProperty("categoria") String categoria, @JsonProperty("input") String input ) {
+	public Category(@JsonProperty("categoria") String categoria, @JsonProperty("input") String input) {
 		this.categoria = categoria;
 		this.input = input;
 	}

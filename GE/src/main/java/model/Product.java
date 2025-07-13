@@ -1,8 +1,11 @@
 package model;
 
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.sql.Date;		
+import com.fasterxml.jackson.annotation.JsonProperty;		
 
 public class Product{
 		private String codigoBarra;
@@ -17,16 +20,16 @@ public class Product{
 	
 		@JsonCreator
 		public Product( @JsonProperty("codigo_barras") String codigoBarras,
-						@JsonProperty("nome_produto") String nomeProduto, 
+						@JsonProperty("nome_produto") String nomeProduto,
 						@JsonProperty("data_validade") Long dataValidade, 
-						@JsonProperty("marca") String marca, 
+						@JsonProperty("marca") String marca,
 						@JsonProperty("categoria") String categoria,
 						@JsonProperty("quantidade") Integer quantidade, 
 						@JsonProperty("peso_produto") Double peso,
+						@JsonProperty("unidade") String unidade,
 						@JsonProperty("altura") Double altura,
 						@JsonProperty("largura") Double largura,
 						@JsonProperty("comprimento") Double comprimento,
-						@JsonProperty("unidade") String unidade,
 						@JsonProperty("valor") Double valor
 					  )
 					{
@@ -55,6 +58,18 @@ public class Product{
 				this.dimensoes = new Dimensoes(altura, largura, comprimento);
 				this.valor = valor;
 			}
+		
+		public Product(ResultSet rs) throws SQLException {
+			this.codigoBarra = rs.getString("codigo_barras");
+			this.nomeProduto = rs.getString("nome_produto");
+			this.dataValidade = rs.getDate("data_validade");
+			this.categoria = rs.getString("categoria");
+			this.marca = rs.getString("marca");
+			this.quantidade = rs.getInt("quantidade");
+			this.pesoProduto = new Peso(rs.getDouble("peso"),rs.getString("unidade"));
+			this.dimensoes = new Dimensoes(rs.getDouble("altura"), rs.getDouble("largura"), rs.getDouble("comprimento"));
+			this.valor = rs.getDouble("valor");
+		}
 		
 		// GETTERS
 		

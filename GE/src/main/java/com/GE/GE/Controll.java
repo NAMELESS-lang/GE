@@ -7,12 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import model.ConexaoDB;
+import model.Category;
 import model.Product;
-import model.ProductDAO;
-import model.JsonReciver;
 
 @RestController // define que esta classe trabalha com requisições de API REST
 public class Controll {
@@ -28,7 +24,7 @@ public class Controll {
 	}
 	
 	@PostMapping("/pesquisar")
-	public ArrayList<Product> buscar(@RequestBody JsonReciver jsonreciver) throws SQLException{
+	public ArrayList<Product> buscar(@RequestBody Category jsonreciver) throws SQLException{
 		return null;
 	}
 	
