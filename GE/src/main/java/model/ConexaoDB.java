@@ -3,7 +3,6 @@ package model;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
-import java.sql.Statement;
 
 
 public class ConexaoDB implements AutoCloseable{
