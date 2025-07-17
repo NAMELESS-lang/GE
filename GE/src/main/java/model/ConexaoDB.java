@@ -28,9 +28,9 @@ public class ConexaoDB implements AutoCloseable{
 				return true;
 			}
 		}catch(SQLException e) { // Se der algum erro durante o processo, a conexao fica nula e o erro é mostrado
-			this.conn = null; 
-			System.out.println("Conexão falhou!");
-			System.out.println("Motivo: "+e.getMessage());
+			this.conn = null;
+			LogErros le = new LogErros();
+			le.registrarError(e);
 		}
 		return false;
 	}
@@ -50,7 +50,8 @@ public class ConexaoDB implements AutoCloseable{
 			}
 		}
 	catch(SQLException e) {
-		System.out.println(e.getMessage());
+		LogErros le = new LogErros();
+		le.registrarError(e);
 	}
 	}
 }

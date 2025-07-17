@@ -10,7 +10,7 @@ import java.util.Random;
 public class Services {
 	private ProductDAO productDAO;
 	
-	Services(){
+	public Services(){
 		this.productDAO = new ProductDAO();
 	}
 	
@@ -45,7 +45,8 @@ public class Services {
 			}
 			
 		}catch(SQLException e) {
-			System.out.println(e.getMessage());
+			LogErros le = new LogErros();
+			le.registrarError(e);
 		}
 		return false;
 	}
@@ -60,7 +61,8 @@ public class Services {
 			}
 			
 		}catch(SQLException e) {
-			System.out.println(e.getMessage());
+			LogErros le = new LogErros();
+			le.registrarError(e);
 		}
 		return false;
 	}
@@ -76,7 +78,8 @@ public class Services {
 			 }
 				
 		}catch(SQLException e) {
-			System.out.println(e.getMessage());
+			LogErros le = new LogErros();
+			le.registrarError(e);
 		}
 		return false;
 	}
@@ -93,7 +96,8 @@ public class Services {
 			return null;
 		
 		}catch(SQLException e) {
-			System.out.println(e.getMessage());
+			LogErros le = new LogErros();
+			le.registrarError(e);
 		}
 		return null;
 	}
