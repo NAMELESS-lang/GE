@@ -10,7 +10,9 @@ public class ProductDAO implements InterfaceProductDAO{
 
 	@Override
 	public boolean cadastrar(ConexaoDB conexao,Product produto) throws SQLException {
-			String query = "insert into product(codigo_barras, nome_produto, data_validade, marca, quantidade, peso, unidade_peso, altura, largura, comprimento, valor)"+
+		
+		
+			String query = "insert into Product(codigo_barras, nome_produto, data_validade, marca, quantidade, peso_produto, unidade, altura, largura, comprimento, valor)"+
 					"VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 			
 			
@@ -29,12 +31,13 @@ public class ProductDAO implements InterfaceProductDAO{
 			state.setDouble(11, produto.getValor());
 			
 
-			return state.execute();
+			state.execute();
+			return true;
 	}
 	
 	@Override
 	public boolean deletar(ConexaoDB conexao, Product produto) throws SQLException{
-			String query = "DELETE FROM product WHERE codigo_barras = ?";
+			String query = "DELETE FROM Product WHERE codigo_barras = ?";
 			
 			PreparedStatement state = conexao.getConn().prepareStatement(query);
 			state.setString(1, produto.getcodigoBarras()); 
@@ -45,7 +48,7 @@ public class ProductDAO implements InterfaceProductDAO{
 	
 	@Override
 	public boolean atualizar(ConexaoDB conexao, Product produto) throws SQLException{
-		String query = "update product" + 
+		String query = "update Product" + 
 					   "set nome_produto = ?, data_validade = ?, marca = ?, quantidade = ?, peso = ?, unidade_peso = ?, altura = ?, largura = ?, comprimento = ?, valor = ?"+
 					   "where codigo_barras = ?"; 
 		
@@ -70,7 +73,7 @@ public class ProductDAO implements InterfaceProductDAO{
 	@Override
 	public ArrayList<Product> pesquisar(ConexaoDB conexao, Category category) throws SQLException{
 		List<Product> pd = new ArrayList<>();
-		String query = "SELECT * FROM product WHERE "+ category.getCategoria()+" = ?";
+		String query = "SELECT * FROM Product WHERE "+ category.getCategoria()+" = ?";
 		PreparedStatement state = conexao.getConn().prepareStatement(query);
 		state.setString(1, category.getInput());
 		
@@ -91,8 +94,7 @@ public class ProductDAO implements InterfaceProductDAO{
 		String query = "SELECT * FROM Product WHERE codigo_barras = ?";
 		
 		PreparedStatement state = conexao.getConn().prepareStatement(query);
-		state.setString(0, codigoBarras);
-		
+		state.setString(1, codigoBarras);
 		ResultSet rs = state.executeQuery();
 		return rs.next();
 	}

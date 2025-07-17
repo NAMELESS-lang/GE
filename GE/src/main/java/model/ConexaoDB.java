@@ -54,5 +54,6 @@ public class ConexaoDB implements AutoCloseable{
 		le.registrarError(e);
 	}
 	}
+	
 }
 

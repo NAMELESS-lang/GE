@@ -17,7 +17,7 @@ public class Product{
 		private Peso pesoProduto;
 		private Dimensoes dimensoes;
 		private Double valor;
-	
+		
 		@JsonCreator
 		public Product( @JsonProperty("codigo_barras") String codigoBarras,
 						@JsonProperty("nome_produto") String nomeProduto,
@@ -43,7 +43,6 @@ public class Product{
 						this.dimensoes = new Dimensoes(altura, largura, comprimento);
 						this.valor = valor;
 					}
-		
 		
 		public Product(String codigoBarras, String nomeProduto, Date dataValidade,String categoria, String marca, Integer quantidade, 
 				Double peso, String unidade, Double altura, Double largura, Double comprimento, Double valor)

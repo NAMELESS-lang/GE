@@ -25,7 +25,7 @@ public class Services {
 		StringBuilder codigo = new StringBuilder();
 		Random r = new Random();
 		for(int i = 0; i < 5; i++) {
-			codigo.append(r.nextInt());
+			codigo.append(r.nextInt(10));
 		}
 		product.setCodigoBarras(codigo.toString());
 	}
@@ -33,7 +33,9 @@ public class Services {
 	public boolean cadastrarProduct(Product product) throws SQLException {
 		try(ConexaoDB conexao = new ConexaoDB("localhost","matheus", "1234", "TESTE")){
 			
+			conexao.iniciarConexao();
 			conexao.getConn().setAutoCommit(false);
+			
 			this.criarCodigobarras(product);
 			while(this.productDAO.consultarCodigoBarras(conexao, product.getcodigoBarras())) {
 				this.criarCodigobarras(product);
@@ -54,6 +56,7 @@ public class Services {
 	public boolean deletarProduct(Product product) throws SQLException{
 		try(ConexaoDB conexao = new ConexaoDB("localhost","matheus", "1234", "TESTE")){
 			
+			conexao.iniciarConexao();
 			conexao.getConn().setAutoCommit(false);
 			if(this.productDAO.deletar(conexao, product)) {
 				conexao.getConn().commit();
@@ -70,6 +73,7 @@ public class Services {
 	public boolean atualizarProduct(Product product) throws SQLException{
 		try(ConexaoDB conexao = new ConexaoDB("localhost","matheus", "1234", "TESTE")){
 				
+			conexao.iniciarConexao();
 			conexao.getConn().setAutoCommit(false);
 			
 			 if(this.productDAO.atualizar(conexao, product)) {
@@ -87,6 +91,7 @@ public class Services {
 	public ArrayList<Product> consultarProducts(Category category) throws SQLException {
 		try(ConexaoDB conexao = new ConexaoDB("localhost","matheus", "1234", "TESTE")){
 			
+			conexao.iniciarConexao();
 			conexao.getConn().setAutoCommit(false);
 			ArrayList<Product> listaProdutos = this.productDAO.pesquisar(conexao,category); 
 			if( listaProdutos != null) {
