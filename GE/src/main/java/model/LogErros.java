@@ -15,8 +15,7 @@ public class LogErros {
 				bf.write("Data do erro: " + LocalDateTime.now().toString());
 				bf.newLine();
 				bf.write(sqle.getMessage());
-				bf.newLine();
-			}
+				bf.newLine();			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());	
 		}
