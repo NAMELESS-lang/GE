@@ -3,7 +3,9 @@ package com.GE.GE;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +25,7 @@ public class Controll {
 		return "Erro ao cadastrar o produto, tente novamente!";
 	}
 	
-	@PostMapping("/atualizar")
+	@PutMapping("/atualizar")
 	public String Atualizar(@RequestBody Product product) throws SQLException{
 		Services sv = new Services();
 		if(sv.atualizarProduct(product)) {
@@ -32,7 +34,7 @@ public class Controll {
 		return "Houve um erro ao atualizar o produto, tente novamente!";
 	}
 	
-	@PostMapping("/pesquisar")
+	@GetMapping("/pesquisar")
 	public ArrayList<Product> buscar(@RequestBody Category category) throws SQLException{
 		Services sv = new Services();
 		ArrayList<Product> lp = sv.consultarProducts(category);
@@ -48,6 +50,6 @@ public class Controll {
 		if(sv.deletarProduct(product)) {
 			return "Produto deletado com sucesso!";
 		}
-		return "Houve um erro ao deletar o produto, tente novamente mais tarde!";
+		return "Houve um erro ao deletar o produto!";
 	}
 	}

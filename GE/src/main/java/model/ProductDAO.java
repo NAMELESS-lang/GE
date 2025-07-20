@@ -30,9 +30,13 @@ public class ProductDAO implements InterfaceProductDAO{
 			state.setDouble(10, produto.getDimensoes().getLargura());
 			state.setDouble(11, produto.getValor());
 			
-
-			state.execute();
-			return true;
+			int result = state.executeUpdate();
+			if( result != 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
 	}
 	
 	@Override

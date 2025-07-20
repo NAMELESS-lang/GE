@@ -1,0 +1,14 @@
+create table product (
+	codigo_barras VARCHAR(5),
+	nome_produto VARCHAR(30),
+	data_validade DATE,
+	marca VARCHAR(20),
+	categoria VARCHAR(30),
+	quantidade INTEGER,
+	peso DOUBLE,
+	unidade_peso VARCHAR(3),
+	altura DOUBLE,
+	largura DOUBLE,
+	comprimento DOUBLE,
+	valor DOUBLE
+);
