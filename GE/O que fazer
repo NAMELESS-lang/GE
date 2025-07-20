@@ -1,4 +1,3 @@
-Criar registro de logs
-Montar os endpoints
-Criar os JSONs para teste
 Montar a documentação
+Corrigir a questão de quando retorna null nas consultas, por exemplo, item não encontrado
+adicionar categoria ao banco de dados e na estrutura do productDAO
