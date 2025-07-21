@@ -40,10 +40,7 @@ public class Controll {
 	@DeleteMapping("/deletar")
 	public String deletar(@RequestBody String codigo_barras) throws SQLException{
 		Services sv = new Services();
-		if(sv.deletarProduct(codigo_barras)) {
-			return "Produto deletado com sucesso!";
-		}
-		return "Houve um erro ao deletar o produto!";
+		return sv.deletarProduct(codigo_barras);
 	}
 	
 	@GetMapping("/pesquisartodos")

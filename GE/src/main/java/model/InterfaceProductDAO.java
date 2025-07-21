@@ -13,6 +13,8 @@ public interface InterfaceProductDAO {
 	
 	public Map<String, String> pesquisarProdutos(ConexaoDB conexao) throws SQLException;
 	
+	public boolean pesquisarProductExistente(ConexaoDB conexao, Product product) throws SQLException;
+	
 	public ArrayList<Product> pesquisar(ConexaoDB conexao, Category jsonreciver) throws SQLException;
 	
 	public boolean consultarCodigoBarras(ConexaoDB conexao, String codigoBarras) throws SQLException;

@@ -13,3 +13,21 @@ Column 'unidade' not found.
 
 Data do erro: 2025-07-21T11:11:22.669681280
 Column 'unidade' not found.
+
+Data do erro: 2025-07-21T15:14:15.967633806
+Parameter index out of range (12 > number of parameters, which is 11).
+
+Data do erro: 2025-07-21T15:15:06.181302238
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', data_validade = '2025-07-16', marca = 'Naturale', categoria = 'Alimentos', qua' at line 1
+
+Data do erro: 2025-07-21T15:20:39.801992850
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', data_validade = '2025-07-16', marca = 'Naturale', categoria = 'Alimentos', qua' at line 1
+
+Data do erro: 2025-07-21T15:23:07.669912660
+Parameter index out of range (2 > number of parameters, which is 1).
+
+Data do erro: 2025-07-21T15:25:26.824607452
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '15.0 = AND comprimento = 10.0 AND valor = 32.9' at line 1
+
+Data do erro: 2025-07-21T15:48:56.124774219
+Parameter index out of range (5 > number of parameters, which is 4).

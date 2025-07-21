@@ -113,4 +113,21 @@ public class ProductDAO implements InterfaceProductDAO{
 		}
 		return pd;
 	}
+
+	@Override
+	public boolean pesquisarProductExistente(ConexaoDB conexao, Product product) throws SQLException {
+		String query = "SELECT * FROM product WHERE " +
+	               "nome_produto = ? AND data_validade = ? AND marca = ? AND categoria = ?";
+		
+		PreparedStatement state = conexao.getConn().prepareStatement(query);
+		
+		state.setString(1, product.getNomeProduto());
+		state.setDate(2, product.getDataValidade());
+		state.setString(3, product.getMarca());
+		state.setString(4, product.getCategoria());
+		
+		ResultSet rs = state.executeQuery();
+		
+		return rs.next();
+	}
 }

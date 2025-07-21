@@ -36,19 +36,20 @@ public class Services {
 			
 			conexao.iniciarConexao();
 			conexao.getConn().setAutoCommit(false);
+	
+			if(this.productDAO.pesquisarProductExistente(conexao, product)) {
+				return "Produto já cadastrado no sistema!";
+			}
 			
 			this.criarCodigobarras(product);
 			while(this.productDAO.consultarCodigoBarras(conexao, product.getcodigoBarras())) {
 				this.criarCodigobarras(product);
 			};
 			
-			int result = this.productDAO.cadastrar(conexao, product);
+			this.productDAO.cadastrar(conexao, product);
 			
-			if (result == 1) {
-				conexao.getConn().commit();
-				return "Produto cadastrado com sucesso!";
-			}
-			return "Produto já cadastrado na base de dados";
+			conexao.getConn().commit();
+			return "Produto cadastrado com sucesso!";
 			
 		}catch(SQLException e) {
 			LogErros le = new LogErros();
@@ -57,21 +58,22 @@ public class Services {
 		}
 	}
 	
-	public boolean deletarProduct(String codigo_barras) throws SQLException{
+	public String deletarProduct(String codigo_barras) throws SQLException{
 		try(ConexaoDB conexao = new ConexaoDB("localhost","matheus", "1234", "TESTE")){
 			
 			conexao.iniciarConexao();
 			conexao.getConn().setAutoCommit(false);
 			if(this.productDAO.deletar(conexao, codigo_barras)) {
 				conexao.getConn().commit();
-				return true;
+				return "Produto deletado com sucesso!";
 			}
+			return "Produto não cadastrado no sistema!";
 			
 		}catch(SQLException e) {
 			LogErros le = new LogErros();
 			le.registrarError(e);
 		}
-		return false;
+		return "Houve um erro ao deletar o produto!";
 	}
 	
 	public String atualizarProduct(Product product) throws SQLException{
@@ -84,7 +86,7 @@ public class Services {
 				 conexao.getConn().commit();
 				 return "Produto atualizado com sucesso!";
 			 }else {
-				 return "Item não encontrado em estoque!";
+				 return "Produto não encontrado em estoque!";
 			 }
 				
 		}catch(SQLException e) {

@@ -6,14 +6,14 @@ import java.sql.DriverManager;
 
 
 public class ConexaoDB implements AutoCloseable{
-	private String endereco_servidor;
+	private String url;
 	private String name;
 	private String password;
 	private Connection conn;
 	
 	
 	public ConexaoDB(String nome_servidor,String name, String password, String banco_de_dados) {
-		this.endereco_servidor = "jdbc:mysql://"+nome_servidor+"/"+banco_de_dados;
+		this.url = "jdbc:mysql://"+nome_servidor+"/"+banco_de_dados;
 		this.name = name;
 		this.password = password;
 	}
@@ -22,7 +22,7 @@ public class ConexaoDB implements AutoCloseable{
 	public boolean iniciarConexao() {
 		try {
 			Connection conexao = null;
-			conexao = DriverManager.getConnection(endereco_servidor, name, password);
+			conexao = DriverManager.getConnection(url, name, password);
 			if(conexao != null) { // Se a conexao der certo é armazenada na propriedade conn do objeto
 				this.conn = conexao;
 				return true;
