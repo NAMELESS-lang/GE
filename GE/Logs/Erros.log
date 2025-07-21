@@ -1,46 +1,15 @@
-Data do erro: 2025-07-17T14:43:06.135312250
-Parameter index out of range (0 < 1 ).
-Data do erro: 2025-07-17T14:46:01.657355245
-Parameter index out of range (0 < 1 ).
-Parameter index out of range (0 < 1 ).
-Data do erro: 2025-07-17T15:06:00.726445581
-Parameter index out of range (0 < 1 ).
 
-Data do erro: 2025-07-17T15:08:04.221238602
-Parameter index out of range (0 < 1 ).
+Data do erro: 2025-07-21T10:28:37.636648858
+Unknown column 'peso_produto' in 'field list'
 
-Data do erro: 2025-07-17T15:11:21.845988417
-Parameter index out of range (0 < 1 ).
+Data do erro: 2025-07-21T10:32:11.647725010
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 'Arroz Integral', data_validade = '2025-07-16', marca = 'Naturale', categoria ' at line 1
 
-Data do erro: 2025-07-17T15:14:02.465360006
-Parameter index out of range (0 < 1 ).
+Data do erro: 2025-07-21T10:39:43.810625507
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 'Arroz Integral', data_validade = '2025-07-16', marca = 'Naturale', categoria ' at line 1
 
-Data do erro: 2025-07-17T15:20:25.189231678
-Parameter index out of range (0 < 1 ).
+Data do erro: 2025-07-21T11:10:53.331689040
+Column 'unidade' not found.
 
-Data do erro: 2025-07-17T15:21:39.359432778
-Parameter index out of range (0 < 1 ).
-
-Data do erro: 2025-07-17T15:23:14.339745967
-Parameter index out of range (0 < 1 ).
-
-Data do erro: 2025-07-17T15:26:29.006064117
-Parameter index out of range (0 < 1 ).
-
-Data do erro: 2025-07-17T15:27:21.824008345
-Parameter index out of range (0 < 1 ).
-
-Data do erro: 2025-07-17T15:28:43.015174406
-Parameter index out of range (0 < 1 ).
-
-Data do erro: 2025-07-17T15:30:18.224336471
-Parameter index out of range (0 < 1 ).
-
-Data do erro: 2025-07-17T15:31:56.644675039
-Table 'TESTE.product' doesn't exist
-
-Data do erro: 2025-07-17T15:32:15.601537785
-Table 'TESTE.product' doesn't exist
-
-Data do erro: 2025-07-17T15:33:51.592591241
-Unknown column 'peso' in 'field list'
+Data do erro: 2025-07-21T11:11:22.669681280
+Column 'unidade' not found.

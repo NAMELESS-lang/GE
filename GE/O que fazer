@@ -1,3 +1,10 @@
 Montar a documentação
 Corrigir a questão de quando retorna null nas consultas, por exemplo, item não encontrado
 adicionar categoria ao banco de dados e na estrutura do productDAO
+
+
+PARA DELETAR ATUALIZAR E CONSULTAR tem que pegar o código de barras que é gerado aletatóriamente.
+
+RETORNA O CÓDIGO DO PRODUTO PARA USO POSTERIOR
+
+CONSULTAR CÓDIGO DE BARRAS PRODUTO X

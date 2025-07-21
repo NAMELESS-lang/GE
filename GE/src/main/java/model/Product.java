@@ -65,7 +65,7 @@ public class Product{
 			this.categoria = rs.getString("categoria");
 			this.marca = rs.getString("marca");
 			this.quantidade = rs.getInt("quantidade");
-			this.pesoProduto = new Peso(rs.getDouble("peso"),rs.getString("unidade"));
+			this.pesoProduto = new Peso(rs.getDouble("peso"),rs.getString("unidade_peso"));
 			this.dimensoes = new Dimensoes(rs.getDouble("altura"), rs.getDouble("largura"), rs.getDouble("comprimento"));
 			this.valor = rs.getDouble("valor");
 		}

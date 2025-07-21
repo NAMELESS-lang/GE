@@ -4,15 +4,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductDAO implements InterfaceProductDAO{
 
 	@Override
-	public boolean cadastrar(ConexaoDB conexao,Product produto) throws SQLException {
+	public int cadastrar(ConexaoDB conexao,Product produto) throws SQLException {
 		
 		
-			String query = "insert into product(codigo_barras, nome_produto, data_validade, marca, categoria, quantidade, peso_produto, unidade, altura, largura, comprimento, valor)"+
+			String query = "insert into product(codigo_barras, nome_produto, data_validade, marca, categoria, quantidade, peso, unidade_peso, altura, largura, comprimento, valor)"+
 					"VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			
@@ -31,12 +33,7 @@ public class ProductDAO implements InterfaceProductDAO{
 			state.setDouble(11, produto.getDimensoes().getLargura());
 			state.setDouble(12, produto.getValor());
 			
-			int result = state.executeUpdate();
-			if( result != 0) {
-				return true;
-			}else {
-				return false;
-			}
+			return state.executeUpdate();
 			
 	}
 	
@@ -53,8 +50,8 @@ public class ProductDAO implements InterfaceProductDAO{
 	
 	@Override
 	public boolean atualizar(ConexaoDB conexao, Product produto) throws SQLException{
-		String query = "update product" + 
-					   "set nome_produto = ?, data_validade = ?, marca = ?, categoria = ?, quantidade = ?, peso = ?, unidade_peso = ?, altura = ?, largura = ?, comprimento = ?, valor = ?"+
+		String query = "update product " + 
+					   "set nome_produto = ?, data_validade = ?, marca = ?, categoria = ?, quantidade = ?, peso = ?, unidade_peso = ?, altura = ?, largura = ?, comprimento = ?, valor = ? "+
 					   "where codigo_barras = ?"; 
 		
 		PreparedStatement state = conexao.getConn().prepareStatement(query);
@@ -76,6 +73,7 @@ public class ProductDAO implements InterfaceProductDAO{
 		return la > 0 ?  true : false;
 	}
 	
+	
 	@Override
 	public ArrayList<Product> pesquisar(ConexaoDB conexao, Category category) throws SQLException{
 		List<Product> pd = new ArrayList<>();
@@ -84,17 +82,15 @@ public class ProductDAO implements InterfaceProductDAO{
 		state.setString(1, category.getInput());
 		
 		ResultSet rs = state.executeQuery();
-		if(rs.next()) {
 		while(rs.next()) {
 			Product produto = new Product(rs);
 			pd.add(produto);		
-		}
+		
 			return (ArrayList<Product>) pd;
-		}else {
-			return null;
 		}
+		return null;
 	}
-
+	
 	@Override
 	public boolean consultarCodigoBarras(ConexaoDB conexao, String codigoBarras) throws SQLException {
 		String query = "SELECT * FROM product WHERE codigo_barras = ?";
@@ -103,5 +99,20 @@ public class ProductDAO implements InterfaceProductDAO{
 		state.setString(1, codigoBarras);
 		ResultSet rs = state.executeQuery();
 		return rs.next();
+	}
+
+	@Override
+	public Map<String, String> pesquisarProdutos(ConexaoDB conexao) throws SQLException {
+		Map<String, String> pd = new HashMap<>();
+		
+		String query = "SELECT codigo_barras, nome_produto FROM product";
+		
+		PreparedStatement state = conexao.getConn().prepareStatement(query);
+		
+		ResultSet rs = state.executeQuery();
+		while(rs.next()) {
+			pd.put(rs.getString("codigo_barras"),rs.getString("nome_produto"));
+		}
+		return pd;
 	}
 }

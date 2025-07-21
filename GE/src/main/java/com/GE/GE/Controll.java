@@ -2,6 +2,7 @@ package com.GE.GE;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,19 +20,13 @@ public class Controll {
 	@PostMapping("/cadastrar") // Caso o método seja POST este método é chamado
 	public String Cadastrar(@RequestBody Product product) throws SQLException { // Recebe como argumento o JSON da requisição http e usa automaticamento no construtor do produto
 		Services sv = new Services();	
-		if(sv.cadastrarProduct(product)) {
-			return "Produto cadastrado com sucesso!";
-		}
-		return "Erro ao cadastrar o produto, tente novamente!";
+		return sv.cadastrarProduct(product);
 	}
 	
 	@PutMapping("/atualizar")
 	public String Atualizar(@RequestBody Product product) throws SQLException{
 		Services sv = new Services();
-		if(sv.atualizarProduct(product)) {
-			return "Produto cadastrado com sucesso!";
-		}
-		return "Houve um erro ao atualizar o produto, tente novamente!";
+		return sv.atualizarProduct(product);
 	}
 	
 	@GetMapping("/pesquisar")
@@ -51,5 +46,11 @@ public class Controll {
 			return "Produto deletado com sucesso!";
 		}
 		return "Houve um erro ao deletar o produto!";
+	}
+	
+	@GetMapping("/pesquisartodos")
+	public Map<String, String> pesquisarTodos() throws SQLException{
+		Services sv = new Services();
+		return sv.pesquisarProducts();
 	}
 	}
