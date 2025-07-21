@@ -26,6 +26,8 @@ public class ConexaoDB implements AutoCloseable{
 			if(conexao != null) { // Se a conexao der certo é armazenada na propriedade conn do objeto
 				this.conn = conexao;
 				return true;
+			}else {
+				throw new SQLException("Conexão com o banco de dados falhou falhou!");
 			}
 		}catch(SQLException e) { // Se der algum erro durante o processo, a conexao fica nula e o erro é mostrado
 			this.conn = null;

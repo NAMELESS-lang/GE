@@ -57,12 +57,12 @@ public class Services {
 		}
 	}
 	
-	public boolean deletarProduct(Product product) throws SQLException{
+	public boolean deletarProduct(String codigo_barras) throws SQLException{
 		try(ConexaoDB conexao = new ConexaoDB("localhost","matheus", "1234", "TESTE")){
 			
 			conexao.iniciarConexao();
 			conexao.getConn().setAutoCommit(false);
-			if(this.productDAO.deletar(conexao, product)) {
+			if(this.productDAO.deletar(conexao, codigo_barras)) {
 				conexao.getConn().commit();
 				return true;
 			}
@@ -99,10 +99,10 @@ public class Services {
 			
 			conexao.iniciarConexao();
 			conexao.getConn().setAutoCommit(false);
+			
 			ArrayList<Product> listaProdutos = this.productDAO.pesquisar(conexao,category); 
 			if( listaProdutos != null) {
 				conexao.getConn().commit();
-				System.out.println(listaProdutos);
 				return listaProdutos;
 			}
 			return null;
@@ -116,6 +116,7 @@ public class Services {
 	
 	public Map<String, String> pesquisarProducts() throws SQLException{
 		try(ConexaoDB conexao = new ConexaoDB("localhost","matheus", "1234", "TESTE")){
+			
 			conexao.iniciarConexao();
 			conexao.getConn().setAutoCommit(false);
 			

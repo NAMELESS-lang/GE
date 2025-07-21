@@ -11,7 +11,7 @@ import java.util.Map;
 public class ProductDAO implements InterfaceProductDAO{
 
 	@Override
-	public int cadastrar(ConexaoDB conexao,Product produto) throws SQLException {
+	public int cadastrar(ConexaoDB conexao,Product product) throws SQLException {
 		
 		
 			String query = "insert into product(codigo_barras, nome_produto, data_validade, marca, categoria, quantidade, peso, unidade_peso, altura, largura, comprimento, valor)"+
@@ -20,54 +20,54 @@ public class ProductDAO implements InterfaceProductDAO{
 			
 			PreparedStatement state = conexao.getConn().prepareStatement(query);
 			
-			state.setString(1, produto.getcodigoBarras());
-			state.setString(2,produto.getNomeProduto());
-			state.setDate(3, produto.getDataValidade());
-			state.setString(4, produto.getMarca());
-			state.setString(5,produto.getCategoria());
-			state.setInt(6,produto.getQuantidade());
-			state.setDouble(7, produto.getPeso().getValorPeso());
-			state.setString(8, produto.getPeso().getMedida());
-			state.setDouble(9, produto.getDimensoes().getAltura());
-			state.setDouble(10, produto.getDimensoes().getComprimento());
-			state.setDouble(11, produto.getDimensoes().getLargura());
-			state.setDouble(12, produto.getValor());
+			state.setString(1, product.getcodigoBarras());
+			state.setString(2,product.getNomeProduto());
+			state.setDate(3, product.getDataValidade());
+			state.setString(4, product.getMarca());
+			state.setString(5,product.getCategoria());
+			state.setInt(6,product.getQuantidade());
+			state.setDouble(7, product.getPeso().getValorPeso());
+			state.setString(8, product.getPeso().getMedida());
+			state.setDouble(9, product.getDimensoes().getAltura());
+			state.setDouble(10, product.getDimensoes().getComprimento());
+			state.setDouble(11, product.getDimensoes().getLargura());
+			state.setDouble(12, product.getValor());
 			
 			return state.executeUpdate();
 			
 	}
 	
 	@Override
-	public boolean deletar(ConexaoDB conexao, Product produto) throws SQLException{
+	public boolean deletar(ConexaoDB conexao, String codigo_barras) throws SQLException{
 			String query = "DELETE FROM product WHERE codigo_barras = ?";
 			
 			PreparedStatement state = conexao.getConn().prepareStatement(query);
-			state.setString(1, produto.getcodigoBarras()); 
+			state.setString(1, codigo_barras); 
 			
 			int status = state.executeUpdate();
 			return status > 0 ? true : false;
 	}
 	
 	@Override
-	public boolean atualizar(ConexaoDB conexao, Product produto) throws SQLException{
+	public boolean atualizar(ConexaoDB conexao, Product product) throws SQLException{
 		String query = "update product " + 
 					   "set nome_produto = ?, data_validade = ?, marca = ?, categoria = ?, quantidade = ?, peso = ?, unidade_peso = ?, altura = ?, largura = ?, comprimento = ?, valor = ? "+
 					   "where codigo_barras = ?"; 
 		
 		PreparedStatement state = conexao.getConn().prepareStatement(query);
 		
-		state.setString(1, produto.getNomeProduto());
-		state.setDate(2, produto.getDataValidade());
-		state.setString(3, produto.getMarca());
-		state.setString(4, produto.getCategoria());
-		state.setInt(5, produto.getQuantidade());
-		state.setDouble(6, produto.getPeso().getValorPeso());
-		state.setString(7, produto.getPeso().getMedida());
-		state.setDouble(8, produto.getDimensoes().getAltura());
-		state.setDouble(9, produto.getDimensoes().getLargura());
-		state.setDouble(10, produto.getDimensoes().getComprimento());
-		state.setDouble(11, produto.getValor());
-		state.setString(12,produto.getcodigoBarras());
+		state.setString(1, product.getNomeProduto());
+		state.setDate(2, product.getDataValidade());
+		state.setString(3, product.getMarca());
+		state.setString(4, product.getCategoria());
+		state.setInt(5, product.getQuantidade());
+		state.setDouble(6, product.getPeso().getValorPeso());
+		state.setString(7, product.getPeso().getMedida());
+		state.setDouble(8, product.getDimensoes().getAltura());
+		state.setDouble(9, product.getDimensoes().getLargura());
+		state.setDouble(10, product.getDimensoes().getComprimento());
+		state.setDouble(11, product.getValor());
+		state.setString(12,product.getcodigoBarras());
 		
 		int la = state.executeUpdate();
 		return la > 0 ?  true : false;
@@ -85,10 +85,8 @@ public class ProductDAO implements InterfaceProductDAO{
 		while(rs.next()) {
 			Product produto = new Product(rs);
 			pd.add(produto);		
-		
-			return (ArrayList<Product>) pd;
 		}
-		return null;
+		return (ArrayList<Product>) pd;
 	}
 	
 	@Override

@@ -7,7 +7,7 @@ import java.util.Map;
 public interface InterfaceProductDAO {
 	public int cadastrar(ConexaoDB conexao,Product product) throws SQLException;
 	
-	public boolean deletar(ConexaoDB conexao, Product product) throws SQLException;
+	public boolean deletar(ConexaoDB conexao, String codigo_barras) throws SQLException;
 	
 	public boolean atualizar(ConexaoDB conexao, Product product) throws SQLException;
 	

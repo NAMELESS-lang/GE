@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,16 +34,13 @@ public class Controll {
 	public ArrayList<Product> buscar(@RequestBody Category category) throws SQLException{
 		Services sv = new Services();
 		ArrayList<Product> lp = sv.consultarProducts(category);
-		if(lp != null) {
-			return lp;
-		}
-		return null;
+		return lp;
 	}
 	
-	@PostMapping("/deletar")
-	public String deletar(@RequestBody Product product) throws SQLException{
+	@DeleteMapping("/deletar")
+	public String deletar(@RequestBody String codigo_barras) throws SQLException{
 		Services sv = new Services();
-		if(sv.deletarProduct(product)) {
+		if(sv.deletarProduct(codigo_barras)) {
 			return "Produto deletado com sucesso!";
 		}
 		return "Houve um erro ao deletar o produto!";
