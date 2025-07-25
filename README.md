@@ -1,6 +1,6 @@
 <div align="center">
   <img width="400" height="400" alt="Logo do sistema" src="https://github.com/user-attachments/assets/631103a4-5ce6-4b7a-bcca-87ad781be36e" />
-</div>div><br/>
+</div><br/>
 # IM (Inventory Manager) <br/>
 ## Projeto que estuda os conceitos básicos de um CRUD em uma aplicação web usando API REST
 
