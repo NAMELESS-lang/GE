@@ -1,4 +1,4 @@
-# GE (Gerenciador de Inventário)
+# IM (Inventory Manager)
 ## Projeto que estuda os conceitos básicos de um CRUD em uma aplicação web usando API REST
 
 ## Observações importantes
