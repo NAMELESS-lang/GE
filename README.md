@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="400" height="400" alt="Logo do sistema" src="https://github.com/user-attachments/assets/631103a4-5ce6-4b7a-bcca-87ad781be36e" />
+  <img width="250" height="250" alt="Logo do sistema" src="https://github.com/user-attachments/assets/631103a4-5ce6-4b7a-bcca-87ad781be36e" />
 </div><br/>
 
 # IM (Inventory Manager) <br/>
